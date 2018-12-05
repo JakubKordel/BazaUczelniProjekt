@@ -47,8 +47,8 @@ int main()
         }
         wyczyscEkran();
     }
-    zwolnij( glowaStudent );
-    zwolnij( glowaPracownik );
-    zwolnij( glowaPrzedmiot );
+    zwolnijOsoba( glowaStudent );
+    zwolnijOsoba( glowaPracownik );
+    zwolnijPrzemdiot( glowaPrzedmiot );
     return 0;
 }
