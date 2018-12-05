@@ -1,24 +1,86 @@
-#include <stdio.h>
-#include "podst.h"
+#include "funkcje.h"
+#include <stdlib.h>
+#include <string.h>
 
-typedef struct Osoba{
-    int id_o;
+Osoba* dodajOsobe( Osoba* glowa, char im[20], char nazw[20] )
+{
+    Osoba* nowaOsoba = malloc( sizeof( Osoba ) );
+    strcpy ( nowaOsoba->imie, im );
+    strcpy ( nowaOsoba->nazwisko, nazw );
+    nowaOsoba->nast = glowa;
+    return nowaOsoba;
+}
+
+
+Osoba* wczytajOsobe( Osoba* glowaOsoba )
+{
     char imie[20];
     char nazwisko[20];
-    struct Osoba* nast;
-}Osoba;
+    char napis[20];
+    printf("Podaj imie: ");
+    strcpy ( imie, wczytajNapis(napis) );
+    printf("Podaj nazwisko: ");
+    strcpy ( nazwisko, wczytajNapis( napis ) );
+    glowaOsoba = dodajOsobe(glowaOsoba, imie, nazwisko);
+    return glowaOsoba;
+}
 
-typedef struct Przedmiot{
-    int id_p;
+Przedmiot* dodajPrzedmiot( Przedmiot* glowa, char nazw[30] )
+{
+    Przedmiot* nowyPrzedmiot = malloc( sizeof( Przedmiot ) );
+    strcpy ( nowyPrzedmiot -> nazwa, nazw );
+    nowyPrzedmiot->nast = glowa;
+    return nowyPrzedmiot;
+}
+
+Przedmiot* wczytajPrzedmiot( Przedmiot* glowaPrzedmiot )
+{
     char nazwa[20];
-    struct Przedmiot* nast;
-}Przedmiot;
+    char napis[20];
+    printf("Podaj nazwe przedmiotu: ");
+    strcpy ( nazwa, wczytajNapis( napis ) );
+    glowaPrzedmiot = dodajPrzedmiot( glowaPrzedmiot, nazwa );
+    return glowaPrzedmiot;
+}
 
-Osoba* dodajOsobe( Osoba* glowa, char imie[20], char nazwisko[20] );
-Osoba* wczytajOsobe( Osoba* glowaOsoba );
-Przedmiot* dodajPrzedmiot( Przedmiot* glowaPrzedmiot, char nazwa[20] );
-Przedmiot* wczytajPrzedmiot( Przedmiot* glowaPrzedmiot );
-void wyswietlListeOsob( Osoba* glowaOsoba );
-void wyswietlListePrzedmiotow( Przedmiot* glowaPrzedmiot );
-void zwolnijOsoba( Osoba* glowa );
-void zwolnijPrzemdiot( Przedmiot* glowa );
+void wyswietlListeOsob( Osoba* glowaOsoba )
+{
+    Osoba* x = glowaOsoba;
+    while( x )
+    {
+        printf( "%s %s\n", x->imie, x->nazwisko );
+        x = x->nast;
+    }
+}
+
+void wyswietlListePrzedmiotow( Przedmiot* glowaPrzedmiot )
+{
+    Przedmiot* x = glowaPrzedmiot;
+    while( x )
+    {
+        printf( "%s \n", x->nazwa );
+        x = x->nast;
+    }
+}
+
+void zwolnijOsoba( Osoba* glowa )
+{
+    Osoba* poprzedni=NULL;
+    while( glowa )
+    {
+        poprzedni = glowa;
+        glowa = glowa -> nast;
+        free( poprzedni );
+    }
+}
+
+void zwolnijPrzemdiot( Przedmiot* glowa )
+{
+    Przedmiot* poprzedni = NULL;
+    while( glowa )
+    {
+        poprzedni = glowa;
+        glowa = glowa -> nast;
+        free( poprzedni );
+    }
+}
