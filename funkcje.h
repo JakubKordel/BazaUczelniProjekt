@@ -9,7 +9,7 @@ typedef struct Osoba{
 }Osoba;
 
 typedef struct Przedmiot{
-    id_p;
+    int id_p;
     char nazwa[20];
     struct Przedmiot* nast;
 }Przedmiot;
@@ -20,8 +20,8 @@ Przedmiot* dodajPrzedmiot( Przedmiot* glowaPrzedmiot, char nazwa[20] );
 Przedmiot* wczytajPrzedmiot( Przedmiot* glowaPrzedmiot );
 void wyswietlListeOsob( Osoba* glowaOsoba );
 void wyswietlListePrzedmiotow( Przedmiot* glowaPrzedmiot );
-
-
+void zwolnijOsoba( Osoba* glowa );
+void zwolnijPrzemdiot( Przedmiot* glowa );
 
 
 
