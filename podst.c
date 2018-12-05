@@ -13,7 +13,7 @@ void wyczyscEkran( ) {
 
 void rysujPrzerwe()
 {
-    printf( "\-------------------------------------------------\n" );
+    printf( "-------------------------------------------------\n" );
 }
 
 char* wczytajNapis( char napis[20] )
