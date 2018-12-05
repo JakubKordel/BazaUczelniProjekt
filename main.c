@@ -8,6 +8,8 @@
 int main()
 {
     Osoba* glowaStudent = NULL;
+    Osoba* glowaPracownik = NULL;
+    Przedmiot* glowaPrzedmiot = NULL;
     printf("WITAJ W BAZIE UCZELNI!\n");
     rysujPrzerwe();
     char wybor;
@@ -21,10 +23,22 @@ int main()
              glowaStudent = wczytajOsobe( glowaStudent );
              break;
             case '2':
+             glowaPracownik = wczytajOsobe( glowaPracownik );
+             break;
+            case '3':
+             glowaPrzedmiot = wczytajPrzedmiot( glowaPrzedmiot );
+            break;
+            case '4':
              wyswietlListeOsob( glowaStudent );
              getchar();
              break;
-            case '3':
+            case '5':
+             wyswietlListeOsob( glowaPracownik );
+             getchar();
+             break;
+            case '6':
+             wyswietlListePrzedmiotow( glowaPrzedmiot );
+             getchar();
              break;
             default:
              printf("Nieprawidlowy znak\n");
@@ -34,6 +48,7 @@ int main()
         wyczyscEkran();
     }
     zwolnij( glowaStudent );
-
+    zwolnij( glowaPracownik );
+    zwolnij( glowaPrzedmiot );
     return 0;
 }
