@@ -4,7 +4,7 @@
 
 void zwolnijOsoba( Osoba* glowa )
 {
-    Osoba* poprzedni=NULL;
+    Osoba* poprzedni = NULL;
     while( glowa )
     {
         poprzedni = glowa;
@@ -13,7 +13,7 @@ void zwolnijOsoba( Osoba* glowa )
     }
 }
 
-void zwolnijPrzemdiot( Przedmiot* glowa )
+void zwolnijPrzedmiot( Przedmiot* glowa )
 {
     Przedmiot* poprzedni = NULL;
     while( glowa )
@@ -24,5 +24,16 @@ void zwolnijPrzemdiot( Przedmiot* glowa )
     }
 }
 
+void zwolnijOsobaPrzedmiot( OsobaPrzedmiot* glowa )
+{
+    OsobaPrzedmiot* poprzedni = NULL;
+    while( glowa )
+    {
+        poprzedni = glowa;
+        glowa = glowa -> nast;
+        free( poprzedni );
+    }
+
+}
 
 

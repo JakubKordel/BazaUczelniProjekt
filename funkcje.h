@@ -5,7 +5,8 @@
 #include "struktury.h"
 
 void zwolnijOsoba( Osoba* glowa );
-void zwolnijPrzemdiot( Przedmiot* glowa );
+void zwolnijPrzedmiot( Przedmiot* glowa );
+void zwolnijOsobaPrzedmiot( OsobaPrzedmiot* glowa );
 
 #endif
 

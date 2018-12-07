@@ -2,6 +2,7 @@
 #define usuwanie.h
 
 #include "funkcje.h"
+#include "przeszukiwanie.h"
 
 Osoba* usuwaniePierwszejOsoby( Osoba* glowa );
 Osoba* usuwanieOsoby( Osoba* glowa, char imie[ MAX ], char nazwisko[ MAX ] );

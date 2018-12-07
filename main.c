@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include "funkcje.h"
 #include "menu.h"
-#include "utime.h"
-#include "podst.h"
+#include "unistd.h"
+#include "usuwanie.h"
+#include "struktury.h"
+#include "wyswietlanie.h"
 
 int main()
 {
@@ -40,6 +42,12 @@ int main()
              wyswietlListePrzedmiotow( glowaPrzedmiot );
              getchar();
              break;
+            case '7':
+             glowaStudent = usuwaniePierwszejOsoby( glowaStudent );
+             break;
+            case '8':
+             glowaPrzedmiot = usuwaniePierwszegoPrzedmiotu( glowaPrzedmiot );
+             break;
             default:
              printf("Nieprawidlowy znak\n");
              usleep(1000);
@@ -49,6 +57,6 @@ int main()
     }
     zwolnijOsoba( glowaStudent );
     zwolnijOsoba( glowaPracownik );
-    zwolnijPrzemdiot( glowaPrzedmiot );
+    zwolnijPrzedmiot( glowaPrzedmiot );
     return 0;
 }
