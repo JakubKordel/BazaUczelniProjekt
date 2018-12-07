@@ -3,9 +3,9 @@
 #include "funkcje.h"
 #include "menu.h"
 #include "unistd.h"
-#include "usuwanie.h"
 #include "struktury.h"
 #include "wyswietlanie.h"
+#include "uzytkownik.h"
 
 int main()
 {
@@ -43,10 +43,9 @@ int main()
              getchar();
              break;
             case '7':
-             glowaStudent = usuwaniePierwszejOsoby( glowaStudent );
+             glowaStudent = wczytajUsuwanaOsobe( glowaStudent );
              break;
             case '8':
-             glowaPrzedmiot = usuwaniePierwszegoPrzedmiotu( glowaPrzedmiot );
              break;
             default:
              printf("Nieprawidlowy znak\n");

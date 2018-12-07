@@ -1,5 +1,4 @@
-#ifndef wyswietlanie.h
-#define wyswietlanie.h
+#pragma once
 
 
 #include <stdio.h>
@@ -9,5 +8,5 @@
 void wyswietlListeOsob( Osoba* glowaOsoba );
 void wyswietlListePrzedmiotow( Przedmiot* glowaPrzedmiot );
 
-#endif
+
 

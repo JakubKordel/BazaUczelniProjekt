@@ -1,8 +1,6 @@
-#ifndef sortowanie.h
-#define sortowanie.h
-
+#pragma once
 #include "funkcje.h"
 
 
 
-#endif
+

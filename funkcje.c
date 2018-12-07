@@ -1,6 +1,6 @@
 #include "funkcje.h"
 #include <stdlib.h>
-#include <string.h>
+
 
 void zwolnijOsoba( Osoba* glowa )
 {

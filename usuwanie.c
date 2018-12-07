@@ -1,4 +1,5 @@
 #include "usuwanie.h"
+#include <stdlib.h>
 
 Osoba* usuwaniePierwszejOsoby( Osoba* glowa )
 {
@@ -14,18 +15,23 @@ Osoba* usuwaniePierwszejOsoby( Osoba* glowa )
 
 Osoba* usuwanieOsoby( Osoba* glowa, char im[ MAX ], char nazw[ MAX ] )
 {
-    if ( glowa ->imie == im && glowa ->nazwisko == nazw )
-        glowa = usuwaniePierwszejOsoby( glowa );
-    else
+    Osoba* poprzednik = NULL;
+    if ( glowa != NULL )
     {
-        Osoba* usuwana = wyszukajOsobe( glowa, im, nazw );
-        if ( usuwana )
+        if ( porownajNapisy( glowa ->imie, im ) && porownajNapisy( glowa ->nazwisko, nazw ) )
+            glowa = usuwaniePierwszejOsoby( glowa );
+        else
         {
-            poprzednikOsoby( glowa, im, nazw ) ->nast = usuwana ->nast;
-            free( usuwana );
+            Osoba* usuwana = wyszukajOsobe( glowa, im, nazw );
+            if ( usuwana )
+            {
+                poprzednik = poprzednikOsoby( glowa, im, nazw );
+                poprzednik ->nast = usuwana ->nast;
+                free( usuwana );
+            }
         }
     }
-    return glowa;
+        return glowa;
 }
 
 Przedmiot* usuwaniePierwszegoPrzedmiotu( Przedmiot* glowa )
@@ -42,7 +48,7 @@ Przedmiot* usuwaniePierwszegoPrzedmiotu( Przedmiot* glowa )
 
 Przedmiot* usuwaniePrzedmiotu( Przedmiot* glowa, char nazw[ MAX ] )
 {
-    if ( glowa ->nazwa == nazw )
+    if ( porownajNapisy( glowa ->nazwa, nazw ) )
         glowa = usuwaniePierwszegoPrzedmiotu( glowa );
     else
     {
@@ -54,5 +60,4 @@ Przedmiot* usuwaniePrzedmiotu( Przedmiot* glowa, char nazw[ MAX ] )
         }
     }
     return glowa;
-
 }

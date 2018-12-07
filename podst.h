@@ -1,5 +1,4 @@
-#ifndef podst.h
-#define podst.h
+#pragma once
 
 #include <stdio.h>
 #define MAX 128
@@ -7,6 +6,6 @@
 void wyczyscBuf();
 void wyczyscEkran();
 void rysujPrzerwe();
-char* wczytajNapis( char napis[ MAX ] );
+char* wczytajNapis();
+int porownajNapisy( char pierwszy[ MAX ], char drugi[ MAX ] );
 
-#endif

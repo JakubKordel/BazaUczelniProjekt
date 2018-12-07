@@ -1,5 +1,4 @@
-#ifndef struktury.h
-#define struktury.h
+#pragma once
 
 #define MAX 128
 #include <stdio.h>
@@ -26,9 +25,6 @@ typedef struct OsobaPrzedmiot
 } OsobaPrzedmiot;
 
 Osoba* dodajOsobe( Osoba* glowa, char imie[ MAX ], char nazwisko[ MAX ] );
-Osoba* wczytajOsobe( Osoba* glowaOsoba );
 Przedmiot* dodajPrzedmiot( Przedmiot* glowaPrzedmiot, char nazwa[ MAX ] );
-Przedmiot* wczytajPrzedmiot( Przedmiot* glowaPrzedmiot );
 OsobaPrzedmiot* dodajOsobaPrzedmiot( OsobaPrzedmiot* glowaOsobaPrzedmiot, Osoba* osoba, Przedmiot* przedmiot );
 
-#endif

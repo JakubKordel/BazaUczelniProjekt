@@ -1,5 +1,4 @@
-#ifndef przeszukiwanie.h
-#define przeszukiwanie.h
+#pragma once
 
 #include <stdio.h>
 #include "struktury.h"
@@ -9,4 +8,4 @@ Osoba* poprzednikOsoby( Osoba* glowa, char im[ MAX ], char nazw[ MAX ] );
 Przedmiot* wyszukajPrzedmiot( Przedmiot* glowa, char nazw[ MAX ] );
 Przedmiot* poprzednikPrzedmiotu( Przedmiot* glowa, char nazw[ MAX ] );
 
-#endif
+
