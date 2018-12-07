@@ -16,7 +16,7 @@ void rysujPrzerwe()
     printf( "-------------------------------------------------\n" );
 }
 
-char* wczytajNapis( char napis[20] )
+char* wczytajNapis( char napis[ MAX ] )
 {
     scanf( "%s", napis );
     wyczyscBuf();

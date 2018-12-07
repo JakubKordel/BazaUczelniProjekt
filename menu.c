@@ -1,6 +1,6 @@
 #include "menu.h"
 
-wyswietlMenu()
+void wyswietlMenu()
 {
     printf( "Wcisnij\n" );
     printf( " 1 aby dodac studenta\n" );
