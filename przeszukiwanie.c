@@ -24,6 +24,17 @@ Osoba* poprzednikOsoby( Osoba* glowa, char im[ MAX ], char nazw[ MAX ] )
     return glowa;
 }
 
+unsigned int policzOsoby( Osoba* glowa )
+{
+    unsigned int licznik = 0;
+    while ( glowa )
+    {
+        ++licznik;
+        glowa = glowa ->nast;
+    }
+    return licznik;
+}
+
 Przedmiot* wyszukajPrzedmiot( Przedmiot* glowa, char nazw[ MAX ] )
 {
     while ( glowa != NULL )
@@ -46,4 +57,15 @@ Przedmiot* poprzednikPrzedmiotu( Przedmiot* glowa, char nazw[ MAX ] )
         glowa = glowa ->nast;
     }
     return glowa;
+}
+
+unsigned int policzPrzedmioty ( Przedmiot* glowa )
+{
+    unsigned int licznik = 0;
+    while ( glowa )
+    {
+        ++licznik;
+        glowa = glowa ->nast;
+    }
+    return licznik;
 }

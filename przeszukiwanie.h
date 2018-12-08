@@ -5,7 +5,9 @@
 
 Osoba* wyszukajOsobe( Osoba* glowa, char im[ MAX ], char nazw[ MAX ] );
 Osoba* poprzednikOsoby( Osoba* glowa, char im[ MAX ], char nazw[ MAX ] );
+unsigned int policzOsoby( Osoba* glowa );
 Przedmiot* wyszukajPrzedmiot( Przedmiot* glowa, char nazw[ MAX ] );
 Przedmiot* poprzednikPrzedmiotu( Przedmiot* glowa, char nazw[ MAX ] );
+unsigned int policzPrzedmioty ( Przedmiot* glowa );
 
 

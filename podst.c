@@ -1,13 +1,15 @@
 #include "podst.h"
 
-void wyczyscBuf(){
+void wyczyscBuf()
+{
     char c;
     do
-     c = getchar();
+        c = getchar();
     while (  c != '\n' && c != EOF );
 }
 
-void wyczyscEkran( ) {
+void wyczyscEkran( )
+{
     system( "clear" );
 }
 
@@ -32,9 +34,25 @@ int porownajNapisy( char pierwszy[ MAX ], char drugi[ MAX ] )
         for ( int i = 0; i < dlugoscPierwszy; ++i )
         {
             if ( pierwszy[i] != drugi[i] )
-            return 0;
+                return 0;
         }
         return 1;
     }
     return 0;
+}
+
+int czyNapisyKolejneAlfabetycznie( char pierwszy[ MAX ], char drugi[ MAX ] )
+{
+    if ( pierwszy[0] < drugi[0] )
+        return 1;
+    if ( pierwszy[0] > drugi[0] )
+        return 0;
+    if ( pierwszy[0] == drugi[0] )
+    {
+        if ( pierwszy[1] < drugi[1] )
+            return 1;
+        if ( pierwszy[1] > drugi[1] )
+            return 0;
+    }
+    return 1;
 }

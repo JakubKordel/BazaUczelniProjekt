@@ -6,6 +6,7 @@
 #include "struktury.h"
 #include "wyswietlanie.h"
 #include "uzytkownik.h"
+#include "sortowanie.h"
 
 int main()
 {
@@ -46,6 +47,7 @@ int main()
              glowaStudent = wczytajUsuwanaOsobe( glowaStudent );
              break;
             case '8':
+             glowaPrzedmiot = posortujWedlugNazwy( glowaPrzedmiot );
              break;
             default:
              printf("Nieprawidlowy znak\n");
