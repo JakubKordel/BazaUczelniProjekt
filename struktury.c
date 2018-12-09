@@ -18,8 +18,6 @@ Przedmiot* dodajPrzedmiot( Przedmiot* glowa, char nazw[ MAX ] )
     return nowyPrzedmiot;
 }
 
-
-
 OsobaPrzedmiot* dodajOsobaPrzedmiot( OsobaPrzedmiot* glowaOsobaPrzedmiot, Osoba* os, Przedmiot* przedm )
 {
     OsobaPrzedmiot* nowyOsobaPrzedmiot = malloc ( sizeof( OsobaPrzedmiot ) );
