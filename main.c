@@ -47,7 +47,7 @@ int main()
              glowaStudent = wczytajUsuwanaOsobe( glowaStudent );
              break;
             case '8':
-             glowaPrzedmiot = posortujWedlugNazwy( glowaPrzedmiot );
+             glowaStudent = posortujWedlugNazwiska( glowaStudent );
              break;
             default:
              printf("Nieprawidlowy znak\n");

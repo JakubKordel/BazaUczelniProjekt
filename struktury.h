@@ -6,6 +6,7 @@
 
 typedef struct Osoba
 {
+    int id;
     char imie[ MAX ];
     char nazwisko[ MAX ];
     struct Osoba* nast;

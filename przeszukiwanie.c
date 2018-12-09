@@ -69,3 +69,39 @@ unsigned int policzPrzedmioty ( Przedmiot* glowa )
     }
     return licznik;
 }
+
+OsobaPrzedmiot* wyszukajOsobaPrzedmiot( OsobaPrzedmiot* glowa, Osoba* os, Przedmiot* przedm )
+{
+    while ( glowa != NULL )
+    {
+        if ( glowa ->osoba == os && glowa ->przedmiot == przedm )
+            return glowa;
+        glowa = glowa ->nast;
+    }
+    return glowa;
+}
+
+OsobaPrzedmiot* poprzednikOsobaPrzedmiot( OsobaPrzedmiot* glowa, Osoba* os, Przedmiot* przedm )
+{
+    OsobaPrzedmiot* poprzednik = NULL;
+    while ( glowa != NULL )
+    {
+        if ( glowa ->osoba == os && glowa ->przedmiot == przedm )
+            return poprzednik;
+        poprzednik = glowa;
+        glowa = glowa ->nast;
+    }
+    return glowa;
+}
+
+int znajdzMaxId( Osoba* glowa )
+{
+    int idMax = 0;
+    while ( glowa )
+    {
+        if ( glowa ->id > idMax )
+            idMax = glowa ->id;
+        glowa = glowa ->nast;
+    }
+    return idMax;
+}

@@ -3,6 +3,7 @@
 Osoba* dodajOsobe( Osoba* glowa, char im[ MAX ], char nazw[ MAX ] )
 {
     Osoba* nowaOsoba = malloc( sizeof( Osoba ) );
+    nowaOsoba ->id = znajdzMaxId( glowa ) + 1 ;
     strcpy ( nowaOsoba ->imie, im );
     strcpy ( nowaOsoba ->nazwisko, nazw );
     nowaOsoba ->nast = glowa;

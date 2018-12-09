@@ -5,8 +5,7 @@ Osoba* usuwaniePierwszejOsoby( Osoba* glowa )
 {
     if ( glowa )
     {
-        Osoba* pierwszy = NULL;
-        pierwszy = glowa;
+        Osoba* pierwszy = glowa;
         glowa = glowa -> nast;
         free( pierwszy );
     }
@@ -38,8 +37,7 @@ Przedmiot* usuwaniePierwszegoPrzedmiotu( Przedmiot* glowa )
 {
     if ( glowa )
     {
-        Przedmiot* pierwszy = NULL;
-        pierwszy = glowa;
+        Przedmiot* pierwszy = glowa;
         glowa = glowa -> nast;
         free( pierwszy );
     }
@@ -56,6 +54,33 @@ Przedmiot* usuwaniePrzedmiotu( Przedmiot* glowa, char nazw[ MAX ] )
         if ( usuwany )
         {
             poprzednikPrzedmiotu( glowa, nazw ) ->nast = usuwany ->nast;
+            free( usuwany );
+        }
+    }
+    return glowa;
+}
+
+OsobaPrzedmiot* usuwaniePierwszejOsobaPrzedmiot( OsobaPrzedmiot* glowa )
+{
+    if ( glowa )
+    {
+        OsobaPrzedmiot* pierwszy = glowa;
+        glowa = glowa -> nast;
+        free( pierwszy );
+    }
+    return glowa;
+}
+
+OsobaPrzedmiot* usuwanieOsobaPrzedmiot( OsobaPrzedmiot* glowa, Osoba* os, Przedmiot* przedm )
+{
+        if ( glowa ->osoba == os && glowa ->przedmiot == przedm )
+        glowa = usuwaniePierwszejOsobaPrzedmiot( glowa );
+    else
+    {
+        OsobaPrzedmiot* usuwany = wyszukajOsobaPrzedmiot( glowa, os, przedm );
+        if ( usuwany )
+        {
+            poprzednikOsobaPrzedmiot( glowa, os, przedm ) ->nast = usuwany ->nast;
             free( usuwany );
         }
     }

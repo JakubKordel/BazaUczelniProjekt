@@ -2,20 +2,18 @@
 
 void wyswietlListeOsob( Osoba* glowaOsoba )
 {
-    Osoba* x = glowaOsoba;
-    while( x )
+    while( glowaOsoba )
     {
-        printf( "%s %s\n", x->imie, x->nazwisko );
-        x = x->nast;
+        printf( "%d %s %s\n", glowaOsoba ->id, glowaOsoba ->imie, glowaOsoba ->nazwisko );
+        glowaOsoba = glowaOsoba ->nast;
     }
 }
 
 void wyswietlListePrzedmiotow( Przedmiot* glowaPrzedmiot )
 {
-    Przedmiot* x = glowaPrzedmiot;
-    while( x )
+    while( glowaPrzedmiot )
     {
-        printf( "%s \n", x->nazwa );
-        x = x->nast;
+        printf( "%s \n", glowaPrzedmiot->nazwa );
+        glowaPrzedmiot = glowaPrzedmiot->nast;
     }
 }
