@@ -103,7 +103,7 @@ void usuwaniePrzedmiotu( Glowy* glowy, Przedmiot* usuwany )
     OsobaPrzedmiot* glowaStudentPrzedmiot = glowy ->studentPrzedmiot;
     OsobaPrzedmiot* glowaPracownikPrzedmiot = glowy ->pracownikPrzedmiot;
     if ( glowy ->przedmiot == usuwany )
-        usuwaniePierwszegoPracownika( glowy );
+        usuwaniePierwszegoPrzedmiotu( glowy );
     else
     {
         poprzednikPrzedmiotu( glowy ->przedmiot, usuwany ) ->nast = usuwany ->nast;

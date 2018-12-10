@@ -9,10 +9,14 @@
 Osoba* wczytajOsobe( Osoba* glowaOsoba );
 Przedmiot* wczytajPrzedmiot( Przedmiot* glowaPrzedmiot );
 void wczytajUsuwanegoStudenta( Glowy* glowy );
+void wczytajUsuwanegoPracownika( Glowy* glowy );
 void wczytajUsuwanyPrzedmiot( Glowy* glowy );
 OsobaPrzedmiot* podepnijStudentaNaPrzedmiot( OsobaPrzedmiot* glowa, Osoba* student, Przedmiot* przedm );
-OsobaPrzedmiot* dajPracownikowiPrzedmiot( OsobaPrzedmiot* glowa, Osoba* pracownik, Przedmiot* przedm );
-void wczytajStudentaDoWypisania( Osoba* glowaStudent, OsobaPrzedmiot* glowaOsobaPrzedmiot );
-void wczytajPracownikaDoWypisania( Osoba* glowaPracownik, OsobaPrzedmiot* glowaPracownikPrzedmiot, OsobaPrzedmiot* glowaStudentPrzedmiot );
-void wczytajPrzedmiotDoWypisania( Przedmiot* glowaPrzedmiot, OsobaPrzedmiot* glowaStudentPrzedmiot, OsobaPrzedmiot* glowaPracownikPrzedmiot );
+void dajStudentowiPrzedmiot( Glowy* glowy, Osoba* student );
+void dajPrzedmiotowiStudenta( Glowy* glowy, Przedmiot *przedmiot );
+void dajPrzedmiotowiProwadzacego( Glowy* glowy, Przedmiot *przedmiot );
+void dajPracownikowiPrzedmiot( Glowy* glowy, Osoba* pracownik );
+void wczytajStudentaDoWypisania( Glowy* glowy );
+void wczytajPracownikaDoWypisania( Glowy* glowy );
+void wczytajPrzedmiotDoWypisania( Glowy* glowy );
 

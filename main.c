@@ -24,48 +24,15 @@ int main()
         scanf("%c", &wybor);
         wyczyscBuf();
         switch( wybor ){
-            case '1':
-             glowy ->student = wczytajOsobe( glowy ->student );
+            case 'S':
+             wyswietlListeStudentow( glowy );
              break;
-            case '2':
-             glowy ->pracownik = wczytajOsobe( glowy ->pracownik );
+            case 'P':
+             wyswietlListePracownikow( glowy );
              break;
-            case '3':
-             glowy ->przedmiot = wczytajPrzedmiot( glowy ->przedmiot );
+            case 'R':
+             wyswietlListePrzedmiotow( glowy );
             break;
-            case '4':
-             wyswietlListeOsob( glowy ->student );
-             getchar();
-             break;
-            case '5':
-             wyswietlListeOsob( glowy ->pracownik );
-             getchar();
-             break;
-            case '6':
-             wyswietlListePrzedmiotow( glowy ->przedmiot );
-             getchar();
-             break;
-            case '7':
-             wczytajUsuwanegoStudenta( glowy );
-             break;
-            case '8':
-             glowy ->student = posortujWedlugNazwiska( glowy ->student );
-             break;
-            case '9':
-             glowy ->studentPrzedmiot = podepnijStudentaNaPrzedmiot( glowy ->studentPrzedmiot, glowy ->student, glowy ->przedmiot );
-             break;
-            case 'a':
-             wczytajStudentaDoWypisania( glowy ->student, glowy ->studentPrzedmiot );
-             break;
-            case 'b':
-             glowy ->pracownikPrzedmiot = dajPracownikowiPrzedmiot( glowy ->pracownikPrzedmiot, glowy ->pracownik, glowy ->przedmiot );
-             break;
-            case 'c':
-             wczytajPracownikaDoWypisania( glowy ->pracownik, glowy ->pracownikPrzedmiot, glowy ->studentPrzedmiot );
-             break;
-            case 'd':
-             wczytajPrzedmiotDoWypisania( glowy ->przedmiot, glowy ->studentPrzedmiot, glowy ->pracownikPrzedmiot );
-             break;
             default:
              printf("Nieprawidlowy znak\n");
              usleep(1000);
@@ -76,5 +43,8 @@ int main()
     zwolnijOsoba( glowy ->student );
     zwolnijOsoba( glowy ->pracownik );
     zwolnijPrzedmiot( glowy ->przedmiot );
+    zwolnijOsobaPrzedmiot( glowy ->studentPrzedmiot );
+    zwolnijOsobaPrzedmiot( glowy ->pracownikPrzedmiot );
+    free( glowy );
     return 0;
 }
