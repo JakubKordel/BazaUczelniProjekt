@@ -3,11 +3,13 @@
 #include "funkcje.h"
 #include "przeszukiwanie.h"
 
-Osoba* usuwaniePierwszejOsoby( Osoba* glowa );
-Osoba* usuwanieOsoby( Osoba* glowa, char imie[ MAX ], char nazwisko[ MAX ] );
-Przedmiot* usuwaniePierwszegoPrzedmiotu( Przedmiot* glowa );
-Przedmiot* usuwaniePrzedmiotu( Przedmiot* glowa, char nazwa[ MAX ] );
+void usuwaniePierwszegoStudenta( Glowy* glowy );
+void usuwanieStudenta( Glowy* glowy, Osoba* usuwany );
+void usuwaniePierwszegoPracownika( Glowy* glowy );
+void usuwaniePracownika( Glowy* glowy, Osoba* usuwany );
+void usuwaniePierwszegoPrzedmiotu( Glowy* glowy );
+void usuwaniePrzedmiotu( Glowy* glowy, Przedmiot* usuwany );
 OsobaPrzedmiot* usuwaniePierwszejOsobaPrzedmiot( OsobaPrzedmiot* glowa );
-OsobaPrzedmiot* usuwanieOsobaPrzedmiot( OsobaPrzedmiot* glowa, Osoba* os, Przedmiot* przedm );
+OsobaPrzedmiot* usuwanieOsobaPrzedmiot( OsobaPrzedmiot* glowa, OsobaPrzedmiot* usuwany );
 
 

@@ -4,7 +4,7 @@ void wyswietlListeOsob( Osoba* glowaOsoba )
 {
     while( glowaOsoba )
     {
-        printf( "%d %s %s\n", glowaOsoba ->id, glowaOsoba ->imie, glowaOsoba ->nazwisko );
+        printf( "%s %s\n", glowaOsoba ->imie, glowaOsoba ->nazwisko );
         glowaOsoba = glowaOsoba ->nast;
     }
 }

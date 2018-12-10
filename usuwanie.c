@@ -1,63 +1,129 @@
 #include "usuwanie.h"
 #include <stdlib.h>
 
-Osoba* usuwaniePierwszejOsoby( Osoba* glowa )
+void usuwaniePierwszegoStudenta( Glowy* glowy )
 {
-    if ( glowa )
+    Osoba* glowaStudent = glowy ->student;
+    OsobaPrzedmiot* glowaStudentPrzedmiot = glowy ->studentPrzedmiot;
+    if ( glowaStudent )
     {
-        Osoba* pierwszy = glowa;
-        glowa = glowa -> nast;
-        free( pierwszy );
-    }
-    return glowa;
-}
-
-Osoba* usuwanieOsoby( Osoba* glowa, char im[ MAX ], char nazw[ MAX ] )
-{
-    Osoba* poprzednik = NULL;
-    if ( glowa != NULL )
-    {
-        if ( porownajNapisy( glowa ->imie, im ) && porownajNapisy( glowa ->nazwisko, nazw ) )
-            glowa = usuwaniePierwszejOsoby( glowa );
-        else
+        while ( glowaStudentPrzedmiot )
         {
-            Osoba* usuwana = wyszukajOsobe( glowa, im, nazw );
-            if ( usuwana )
-            {
-                poprzednik = poprzednikOsoby( glowa, im, nazw );
-                poprzednik ->nast = usuwana ->nast;
-                free( usuwana );
-            }
+            if ( glowaStudentPrzedmiot ->osoba == glowaStudent )
+                glowy ->studentPrzedmiot = usuwanieOsobaPrzedmiot( glowy ->studentPrzedmiot, glowaStudentPrzedmiot );
+            glowaStudentPrzedmiot = glowaStudentPrzedmiot ->nast;
         }
+        glowy ->student = glowaStudent ->nast;
+        free( glowaStudent );
     }
-        return glowa;
 }
 
-Przedmiot* usuwaniePierwszegoPrzedmiotu( Przedmiot* glowa )
+void usuwanieStudenta( Glowy* glowy, Osoba* usuwany )
 {
-    if ( glowa )
-    {
-        Przedmiot* pierwszy = glowa;
-        glowa = glowa -> nast;
-        free( pierwszy );
-    }
-    return glowa;
-}
-
-Przedmiot* usuwaniePrzedmiotu( Przedmiot* glowa, char nazw[ MAX ] )
-{
-    if ( porownajNapisy( glowa ->nazwa, nazw ) )
-        glowa = usuwaniePierwszegoPrzedmiotu( glowa );
+    OsobaPrzedmiot* glowaStudentPrzedmiot = glowy ->studentPrzedmiot;
+    if ( glowy ->student == usuwany )
+        usuwaniePierwszegoStudenta( glowy );
     else
     {
-        Przedmiot* usuwany = wyszukajPrzedmiot( glowa, nazw );
-        if ( usuwany )
+        poprzednikOsoby( glowy ->student, usuwany ) ->nast = usuwany ->nast;
+        while ( glowaStudentPrzedmiot )
         {
-            poprzednikPrzedmiotu( glowa, nazw ) ->nast = usuwany ->nast;
-            free( usuwany );
+            if ( glowaStudentPrzedmiot ->osoba == usuwany )
+                glowy ->studentPrzedmiot = usuwanieOsobaPrzedmiot( glowy ->studentPrzedmiot, glowaStudentPrzedmiot );
+            glowaStudentPrzedmiot = glowaStudentPrzedmiot ->nast;
         }
+        free( usuwany );
     }
-    return glowa;
+}
+
+void usuwaniePierwszegoPracownika( Glowy* glowy )
+{
+    Osoba* glowaPracownik = glowy ->pracownik;
+    OsobaPrzedmiot* glowaPracownikPrzedmiot = glowy ->pracownikPrzedmiot;
+    if ( glowaPracownik )
+    {
+        while ( glowaPracownikPrzedmiot )
+        {
+            if ( glowaPracownikPrzedmiot ->osoba == glowaPracownik )
+                glowy ->pracownikPrzedmiot = usuwanieOsobaPrzedmiot( glowy ->pracownikPrzedmiot, glowaPracownikPrzedmiot );
+            glowaPracownikPrzedmiot = glowaPracownikPrzedmiot ->nast;
+        }
+        glowy ->pracownik = glowaPracownik ->nast;
+        free( glowaPracownik );
+    }
+}
+
+void usuwaniePracownika( Glowy* glowy, Osoba* usuwany )
+{
+    OsobaPrzedmiot* glowaPracownikPrzedmiot = glowy ->pracownikPrzedmiot;
+    if ( glowy ->pracownik == usuwany )
+        usuwaniePierwszegoPracownika( glowy );
+    else
+    {
+        poprzednikOsoby( glowy ->pracownik, usuwany ) ->nast = usuwany ->nast;
+        while ( glowaPracownikPrzedmiot )
+        {
+            if ( glowaPracownikPrzedmiot ->osoba == usuwany )
+                glowy ->pracownikPrzedmiot = usuwanieOsobaPrzedmiot( glowy ->pracownikPrzedmiot, glowaPracownikPrzedmiot );
+            glowaPracownikPrzedmiot = glowaPracownikPrzedmiot ->nast;
+        }
+        free( usuwany );
+    }
+}
+
+void usuwaniePierwszegoPrzedmiotu( Glowy* glowy )
+{
+    Przedmiot* glowaPrzedmiot = glowy ->przedmiot;
+    OsobaPrzedmiot* glowaStudentPrzedmiot = glowy ->studentPrzedmiot;
+    OsobaPrzedmiot* glowaPracownikPrzedmiot = glowy ->pracownikPrzedmiot;
+    if ( glowaPrzedmiot )
+    {
+        while ( glowaStudentPrzedmiot )
+        {
+            if ( glowaStudentPrzedmiot ->przedmiot == glowaPrzedmiot )
+                glowy ->studentPrzedmiot = usuwanieOsobaPrzedmiot( glowy ->studentPrzedmiot, glowaStudentPrzedmiot );
+            glowaStudentPrzedmiot = glowaStudentPrzedmiot ->nast;
+        }
+        while ( glowaPracownikPrzedmiot )
+        {
+            if ( glowaPracownikPrzedmiot ->przedmiot == glowaPrzedmiot )
+            {
+                glowy ->pracownikPrzedmiot = usuwanieOsobaPrzedmiot( glowy ->pracownikPrzedmiot, glowaPracownikPrzedmiot );
+                break;
+            }
+            glowaPracownikPrzedmiot = glowaPracownikPrzedmiot ->nast;
+        }
+        glowy ->przedmiot = glowaPrzedmiot ->nast;
+        free( glowaPrzedmiot );
+    }
+}
+
+void usuwaniePrzedmiotu( Glowy* glowy, Przedmiot* usuwany )
+{
+    OsobaPrzedmiot* glowaStudentPrzedmiot = glowy ->studentPrzedmiot;
+    OsobaPrzedmiot* glowaPracownikPrzedmiot = glowy ->pracownikPrzedmiot;
+    if ( glowy ->przedmiot == usuwany )
+        usuwaniePierwszegoPracownika( glowy );
+    else
+    {
+        poprzednikPrzedmiotu( glowy ->przedmiot, usuwany ) ->nast = usuwany ->nast;
+        while ( glowaStudentPrzedmiot )
+        {
+            if ( glowaStudentPrzedmiot ->przedmiot == usuwany )
+                glowy ->studentPrzedmiot = usuwanieOsobaPrzedmiot( glowy ->studentPrzedmiot, glowaStudentPrzedmiot );
+            glowaStudentPrzedmiot = glowaStudentPrzedmiot ->nast;
+        }
+        while ( glowaPracownikPrzedmiot )
+        {
+            if ( glowaPracownikPrzedmiot ->przedmiot == usuwany )
+            {
+                glowy ->pracownikPrzedmiot = usuwanieOsobaPrzedmiot( glowy ->pracownikPrzedmiot, glowaPracownikPrzedmiot );
+                break;
+            }
+            glowaPracownikPrzedmiot = glowaPracownikPrzedmiot ->nast;
+        }
+        free( usuwany );
+    }
 }
 
 OsobaPrzedmiot* usuwaniePierwszejOsobaPrzedmiot( OsobaPrzedmiot* glowa )
@@ -71,16 +137,15 @@ OsobaPrzedmiot* usuwaniePierwszejOsobaPrzedmiot( OsobaPrzedmiot* glowa )
     return glowa;
 }
 
-OsobaPrzedmiot* usuwanieOsobaPrzedmiot( OsobaPrzedmiot* glowa, Osoba* os, Przedmiot* przedm )
+OsobaPrzedmiot* usuwanieOsobaPrzedmiot( OsobaPrzedmiot* glowa, OsobaPrzedmiot* usuwany )
 {
-        if ( glowa ->osoba == os && glowa ->przedmiot == przedm )
+    if ( glowa == usuwany )
         glowa = usuwaniePierwszejOsobaPrzedmiot( glowa );
     else
     {
-        OsobaPrzedmiot* usuwany = wyszukajOsobaPrzedmiot( glowa, os, przedm );
         if ( usuwany )
         {
-            poprzednikOsobaPrzedmiot( glowa, os, przedm ) ->nast = usuwany ->nast;
+            poprzednikOsobaPrzedmiot( glowa, usuwany ) ->nast = usuwany ->nast;
             free( usuwany );
         }
     }

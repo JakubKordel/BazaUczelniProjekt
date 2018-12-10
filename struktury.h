@@ -25,6 +25,16 @@ typedef struct OsobaPrzedmiot
     struct OsobaPrzedmiot* nast;
 } OsobaPrzedmiot;
 
+typedef struct Glowy
+{
+    Osoba* student;
+    Osoba* pracownik;
+    Przedmiot* przedmiot;
+    OsobaPrzedmiot* studentPrzedmiot;
+    OsobaPrzedmiot* pracownikPrzedmiot;
+} Glowy;
+
+
 Osoba* dodajOsobe( Osoba* glowa, char imie[ MAX ], char nazwisko[ MAX ] );
 Przedmiot* dodajPrzedmiot( Przedmiot* glowaPrzedmiot, char nazwa[ MAX ] );
 OsobaPrzedmiot* dodajOsobaPrzedmiot( OsobaPrzedmiot* glowaOsobaPrzedmiot, Osoba* osoba, Przedmiot* przedmiot );

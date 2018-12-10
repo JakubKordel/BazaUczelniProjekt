@@ -11,12 +11,12 @@ Osoba* wyszukajOsobe( Osoba* glowa, char im[ MAX ], char nazw[ MAX ] )
     return glowa;
 }
 
-Osoba* poprzednikOsoby( Osoba* glowa, char im[ MAX ], char nazw[ MAX ] )
+Osoba* poprzednikOsoby( Osoba* glowa, Osoba* osoba)
 {
     Osoba* poprzednik = NULL;
     while ( glowa != NULL )
     {
-        if ( porownajNapisy( glowa ->imie, im ) && porownajNapisy( glowa ->nazwisko, nazw ) )
+        if ( glowa == osoba )
             return poprzednik;
         poprzednik = glowa;
         glowa = glowa ->nast;
@@ -46,12 +46,12 @@ Przedmiot* wyszukajPrzedmiot( Przedmiot* glowa, char nazw[ MAX ] )
     return glowa;
 }
 
-Przedmiot* poprzednikPrzedmiotu( Przedmiot* glowa, char nazw[ MAX ] )
+Przedmiot* poprzednikPrzedmiotu( Przedmiot* glowa, Przedmiot* przedmiot )
 {
     Przedmiot* poprzednik = NULL;
     while ( glowa != NULL )
     {
-        if ( porownajNapisy(glowa ->nazwa, nazw ) )
+        if ( glowa == przedmiot )
             return poprzednik;
         poprzednik = glowa;
         glowa = glowa ->nast;
@@ -81,12 +81,12 @@ OsobaPrzedmiot* wyszukajOsobaPrzedmiot( OsobaPrzedmiot* glowa, Osoba* os, Przedm
     return glowa;
 }
 
-OsobaPrzedmiot* poprzednikOsobaPrzedmiot( OsobaPrzedmiot* glowa, Osoba* os, Przedmiot* przedm )
+OsobaPrzedmiot* poprzednikOsobaPrzedmiot( OsobaPrzedmiot* glowa, OsobaPrzedmiot* osobaPrzedmiot )
 {
     OsobaPrzedmiot* poprzednik = NULL;
     while ( glowa != NULL )
     {
-        if ( glowa ->osoba == os && glowa ->przedmiot == przedm )
+        if ( osobaPrzedmiot == glowa )
             return poprzednik;
         poprzednik = glowa;
         glowa = glowa ->nast;

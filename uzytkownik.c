@@ -35,39 +35,58 @@ Przedmiot* wczytajPrzedmiot( Przedmiot* glowaPrzedmiot )
     return glowaPrzedmiot;
 }
 
-Osoba* wczytajUsuwanaOsobe( Osoba* glowa )
+void wczytajUsuwanegoStudenta( Glowy* glowy )
 {
     char imie[ MAX ];
     char nazwisko[ MAX ];
     char napis[ MAX ];
-    printf("Podaj imie usuwanej osoby: ");
+    printf("Podaj imie usuwanego studenta: ");
     strcpy ( imie, wczytajNapis( napis ) );
-    printf("Podaj nazwisko usuwanej osoby: ");
+    printf("Podaj nazwisko usuwanego studenta: ");
     strcpy ( nazwisko, wczytajNapis( napis ) );
-    if ( !wyszukajOsobe( glowa, imie, nazwisko ) )
+    Osoba* usuwany = wyszukajOsobe( glowy ->student , imie, nazwisko );
+    if ( !usuwany )
     {
         printf("Taka osoba nie istnieje!\n" );
         getchar();
-        return glowa;
     }
-    glowa = usuwanieOsoby( glowa, imie, nazwisko);
-    return glowa;
+    else
+    usuwanieStudenta( glowy, usuwany );
 }
 
-Przedmiot* wczytajUsuwanyPrzedmiot( Przedmiot* glowa )
+void wczytajUsuwanegoPracownika( Glowy* glowy )
+{
+    char imie[ MAX ];
+    char nazwisko[ MAX ];
+    char napis[ MAX ];
+    printf("Podaj imie usuwanego pracownika: ");
+    strcpy ( imie, wczytajNapis( napis ) );
+    printf("Podaj nazwisko usuwanego pracownika: ");
+    strcpy ( nazwisko, wczytajNapis( napis ) );
+    Osoba* usuwany = wyszukajOsobe( glowy ->pracownik , imie, nazwisko );
+    if ( !usuwany )
+    {
+        printf("Taka osoba nie istnieje!\n" );
+        getchar();
+    }
+    else
+    usuwaniePracownika( glowy, usuwany );
+}
+
+void wczytajUsuwanyPrzedmiot( Glowy* glowy )
 {
     char nazwa[ MAX ];
     char napis[ MAX ];
     printf("Podaj nazwe usuwanego przedmiotu: ");
     strcpy ( nazwa, wczytajNapis( napis ) );
-    if ( !wyszukajPrzedmiot( glowa, nazwa ) )
+    Przedmiot* usuwany = wyszukajPrzedmiot( glowy ->przedmiot, nazwa );
+    if ( !usuwany )
     {
         printf("Taki przedmiot nie istnieje!\n" );
         getchar();
-        return glowa;
     }
-    glowa = usuwaniePrzedmiotu( glowa, nazwa );
-    return glowa;
+    else
+    usuwaniePrzedmiotu( glowy, usuwany );
 }
 
 OsobaPrzedmiot* podepnijStudentaNaPrzedmiot( OsobaPrzedmiot* glowa, Osoba* studentGlowa, Przedmiot* przedmGlowa )

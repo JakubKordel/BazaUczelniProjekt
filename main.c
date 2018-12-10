@@ -10,11 +10,11 @@
 
 int main()
 {
-    Osoba* glowaStudent = NULL;
-    Osoba* glowaPracownik = NULL;
-    Przedmiot* glowaPrzedmiot = NULL;
-    OsobaPrzedmiot* glowaStudentPrzedmiot = NULL;
-    OsobaPrzedmiot* glowaPracownikPrzedmiot = NULL;
+    Glowy* glowy = malloc( sizeof( Glowy ) );
+    glowy ->pracownik = NULL;
+    glowy ->student = NULL;
+    glowy ->pracownikPrzedmiot = NULL;
+    glowy ->studentPrzedmiot = NULL;
     printf("WITAJ W BAZIE UCZELNI!\n");
     rysujPrzerwe();
     char wybor;
@@ -25,46 +25,46 @@ int main()
         wyczyscBuf();
         switch( wybor ){
             case '1':
-             glowaStudent = wczytajOsobe( glowaStudent );
+             glowy ->student = wczytajOsobe( glowy ->student );
              break;
             case '2':
-             glowaPracownik = wczytajOsobe( glowaPracownik );
+             glowy ->pracownik = wczytajOsobe( glowy ->pracownik );
              break;
             case '3':
-             glowaPrzedmiot = wczytajPrzedmiot( glowaPrzedmiot );
+             glowy ->przedmiot = wczytajPrzedmiot( glowy ->przedmiot );
             break;
             case '4':
-             wyswietlListeOsob( glowaStudent );
+             wyswietlListeOsob( glowy ->student );
              getchar();
              break;
             case '5':
-             wyswietlListeOsob( glowaPracownik );
+             wyswietlListeOsob( glowy ->pracownik );
              getchar();
              break;
             case '6':
-             wyswietlListePrzedmiotow( glowaPrzedmiot );
+             wyswietlListePrzedmiotow( glowy ->przedmiot );
              getchar();
              break;
             case '7':
-             glowaStudent = wczytajUsuwanaOsobe( glowaStudent );
+             wczytajUsuwanegoStudenta( glowy );
              break;
             case '8':
-             glowaStudent = posortujWedlugNazwiska( glowaStudent );
+             glowy ->student = posortujWedlugNazwiska( glowy ->student );
              break;
             case '9':
-             glowaStudentPrzedmiot = podepnijStudentaNaPrzedmiot( glowaStudentPrzedmiot, glowaStudent, glowaPrzedmiot );
+             glowy ->studentPrzedmiot = podepnijStudentaNaPrzedmiot( glowy ->studentPrzedmiot, glowy ->student, glowy ->przedmiot );
              break;
             case 'a':
-             wczytajStudentaDoWypisania( glowaStudent, glowaStudentPrzedmiot );
+             wczytajStudentaDoWypisania( glowy ->student, glowy ->studentPrzedmiot );
              break;
             case 'b':
-             glowaPracownikPrzedmiot = dajPracownikowiPrzedmiot( glowaPracownikPrzedmiot, glowaPracownik, glowaPrzedmiot );
+             glowy ->pracownikPrzedmiot = dajPracownikowiPrzedmiot( glowy ->pracownikPrzedmiot, glowy ->pracownik, glowy ->przedmiot );
              break;
             case 'c':
-             wczytajPracownikaDoWypisania( glowaPracownik, glowaPracownikPrzedmiot, glowaStudentPrzedmiot );
+             wczytajPracownikaDoWypisania( glowy ->pracownik, glowy ->pracownikPrzedmiot, glowy ->studentPrzedmiot );
              break;
             case 'd':
-             wczytajPrzedmiotDoWypisania( glowaPrzedmiot, glowaStudentPrzedmiot, glowaPracownikPrzedmiot );
+             wczytajPrzedmiotDoWypisania( glowy ->przedmiot, glowy ->studentPrzedmiot, glowy ->pracownikPrzedmiot );
              break;
             default:
              printf("Nieprawidlowy znak\n");
@@ -73,8 +73,8 @@ int main()
         }
         wyczyscEkran();
     }
-    zwolnijOsoba( glowaStudent );
-    zwolnijOsoba( glowaPracownik );
-    zwolnijPrzedmiot( glowaPrzedmiot );
+    zwolnijOsoba( glowy ->student );
+    zwolnijOsoba( glowy ->pracownik );
+    zwolnijPrzedmiot( glowy ->przedmiot );
     return 0;
 }
