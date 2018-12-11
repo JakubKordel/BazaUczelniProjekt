@@ -23,7 +23,6 @@ char* wczytajNapis( char napis[ MAX ] )
     do
     {
         scanf( "%s", napis );
-        wyczyscBuf();
     }
     while ( strlen ( napis ) > MAX - 2 );
     wyczyscBuf();
@@ -53,7 +52,7 @@ int czyNapisyKolejneAlfabetycznie( char pierwszy[ MAX ], char drugi[ MAX ] )
     {
         if ( pierwszy[i] < drugi[i] )
             return 1;
-        if ( pierwszy[0] > drugi[0] )
+        if ( pierwszy[i] > drugi[i] )
             return 0;
         ++i;
     }
