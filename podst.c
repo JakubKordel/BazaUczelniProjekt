@@ -20,7 +20,12 @@ void rysujPrzerwe()
 
 char* wczytajNapis( char napis[ MAX ] )
 {
-    scanf( "%s", napis );
+    do
+    {
+        scanf( "%s", napis );
+        wyczyscBuf();
+    }
+    while ( strlen ( napis ) > MAX - 2 );
     wyczyscBuf();
     return napis;
 }
@@ -46,11 +51,11 @@ int czyNapisyKolejneAlfabetycznie( char pierwszy[ MAX ], char drugi[ MAX ] )
     int i = 0;
     while ( i < MAX )
     {
-    if ( pierwszy[i] < drugi[i] )
-        return 1;
-    if ( pierwszy[0] > drugi[0] )
-        return 0;
-    ++i;
+        if ( pierwszy[i] < drugi[i] )
+            return 1;
+        if ( pierwszy[0] > drugi[0] )
+            return 0;
+        ++i;
     }
     return 2;
 }
