@@ -23,20 +23,23 @@ int main()
         wyswietlMenu();
         scanf("%c", &wybor);
         wyczyscBuf();
-        switch( wybor ){
-            case 'S':
-             wyswietlListeStudentow( glowy );
-             break;
-            case 'P':
-             wyswietlListePracownikow( glowy );
-             break;
-            case 'R':
-             wyswietlListePrzedmiotow( glowy );
+        switch( wybor )
+        {
+        case 'S':
+            wyswietlListeStudentow( glowy );
             break;
-            default:
-             printf("Nieprawidlowy znak\n");
-             usleep(1000);
-             break;
+        case 'P':
+            wyswietlListePracownikow( glowy );
+            break;
+        case 'R':
+            wyswietlListePrzedmiotow( glowy );
+            break;
+        case 'e':
+            break;
+        default:
+            printf("Nieprawidlowy znak\n");
+            usleep(1000);
+            break;
         }
         wyczyscEkran();
     }

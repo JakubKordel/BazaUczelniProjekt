@@ -21,7 +21,7 @@ void wyswietlListeStudentow( Glowy* glowy )
         rysujPrzerwe();
         printf("\nD - dodaj studenta\n");
         printf("\nU - usun studenta\n");
-        printf("\nW - Wypis o studencie\n");
+        printf("\nW - Wypis i zarzadzanie studentem\n");
         printf("\nN - posortuj wedlug nazwiska\n");
         printf("I - posortuj wedlug imienia\n");
         printf("i - posortuj wedlug numeru indeksu\n");
@@ -37,6 +37,7 @@ void wyswietlListeStudentow( Glowy* glowy )
             glowy ->student = posortujWedlugImienia( glowy ->student );
             break;
         case 'i':
+            glowy ->student = posortujWedlugIndeksu( glowy ->student );
             break;
         case 'D':
             glowy ->student = wczytajOsobe( glowy ->student );
@@ -78,7 +79,7 @@ void wyswietlListePracownikow( Glowy* glowy )
         rysujPrzerwe();
         printf("\nD - dodaj pracownika\n");
         printf("\nU - usun pracownika\n");
-        printf("\nW - Wypis o pracowniku\n");
+        printf("\nW - Wypis i zarzadzanie pracownikiem\n");
         printf("\nN - posortuj wedlug nazwiska\n");
         printf("I - posortuj wedlug imienia\n");
         printf("e - aby wrocic\n");
@@ -120,7 +121,7 @@ void wyswietlListePrzedmiotow( Glowy* glowy )
         glowy ->przedmiot = posortujWedlugNazwy( glowy ->przedmiot );
         wyczyscEkran();
         rysujPrzerwe();
-        printf("LISTA PRZEDMIOTOW \n");
+        printf( "LISTA PRZEDMIOTOW \n" );
         rysujPrzerwe();
         printf("NAZWA\n");
         x = glowy ->przedmiot;
@@ -130,10 +131,11 @@ void wyswietlListePrzedmiotow( Glowy* glowy )
             x = x ->nast;
         }
         rysujPrzerwe();
-        printf("\nD - dodaj przedmiot\n");
-        printf("\nU - usun przedmiot\n");
-        printf("\nW - Wypis o przedmiocie\n");
-        printf("\ne - aby wrocic\n");
+        printf( " " );
+        printf( "\nD - dodaj przedmiot\n" );
+        printf( "\nU - usun przedmiot\n" );
+        printf( "\nW - Wypis i zarzadzanie przedmiotem\n" );
+        printf( "\ne - aby wrocic\n");
         scanf("%c", &wybor);
         wyczyscBuf();
         switch ( wybor )
@@ -231,6 +233,8 @@ void wypisPrzedmiot( Przedmiot* przedmiot, Glowy* glowy )
         rysujPrzerwe();
         printf("\nP - podepnij na przedmiot studenta\n");
         printf("\nD - Daj prowadzacego\n");
+        printf("\nu - Wykresl ucznia z przedmiotu\n");
+        printf("\nr - Usun prowadzacego przedmiotu\n");
         printf("\nU - usun przedmiot\n");
         printf("e - aby wrocic\n");
         scanf("%c", &wybor);
@@ -245,6 +249,12 @@ void wypisPrzedmiot( Przedmiot* przedmiot, Glowy* glowy )
             break;
         case 'D':
             dajPrzedmiotowiProwadzacego( glowy, przedmiot );
+            break;
+        case 'u':
+            usunZprzedmiotuStudenta( glowy, przedmiot );
+            break;
+        case 'r':
+            usunZprzedmiotuProwadzacego( glowy, przedmiot );
             break;
         case 'e':
             break;

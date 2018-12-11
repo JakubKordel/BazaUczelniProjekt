@@ -19,4 +19,6 @@ void dajPracownikowiPrzedmiot( Glowy* glowy, Osoba* pracownik );
 void wczytajStudentaDoWypisania( Glowy* glowy );
 void wczytajPracownikaDoWypisania( Glowy* glowy );
 void wczytajPrzedmiotDoWypisania( Glowy* glowy );
+void usunZprzedmiotuStudenta( Glowy* glowy, Przedmiot* przedmiot );
+void usunZprzedmiotuProwadzacego( Glowy* glowy, Przedmiot* przedm );
 

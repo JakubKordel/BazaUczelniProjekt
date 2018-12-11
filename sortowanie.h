@@ -5,3 +5,4 @@
 Osoba* posortujWedlugNazwiska( Osoba* glowa );
 Osoba* posortujWedlugImienia( Osoba* glowa );
 Przedmiot* posortujWedlugNazwy( Przedmiot* glowa );
+Osoba* posortujWedlugIndeksu( Osoba* student );

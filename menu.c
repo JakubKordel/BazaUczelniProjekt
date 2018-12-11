@@ -6,5 +6,6 @@ void wyswietlMenu()
     printf( " S - Lista oraz dodawanie studentow\n" );
     printf( " P - Lista oraz dodawanie pracownikow\n" );
     printf( " R - Lista oraz dodawanie przedmiotow\n" );
+    printf( "\n e - Oposc baze\n" );
 }
 

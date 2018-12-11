@@ -43,16 +43,14 @@ int porownajNapisy( char pierwszy[ MAX ], char drugi[ MAX ] )
 
 int czyNapisyKolejneAlfabetycznie( char pierwszy[ MAX ], char drugi[ MAX ] )
 {
-    if ( pierwszy[0] < drugi[0] )
+    int i = 0;
+    while ( i < MAX )
+    {
+    if ( pierwszy[i] < drugi[i] )
         return 1;
     if ( pierwszy[0] > drugi[0] )
         return 0;
-    if ( pierwszy[0] == drugi[0] )
-    {
-        if ( pierwszy[1] < drugi[1] )
-            return 1;
-        if ( pierwszy[1] > drugi[1] )
-            return 0;
+    ++i;
     }
-    return 1;
+    return 2;
 }

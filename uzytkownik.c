@@ -303,3 +303,49 @@ void wczytajPrzedmiotDoWypisania( Glowy* glowy )
         getchar();
     }
 }
+
+void usunZprzedmiotuStudenta( Glowy* glowy, Przedmiot* przedmiot )
+{
+    char imie[ MAX ];
+    char nazwisko[ MAX ];
+    char napis[ MAX ];
+    printf("Podaj imie usuwanego studenta z przedmiotu: ");
+    strcpy ( imie, wczytajNapis( napis ) );
+    printf("Podaj nazwisko usuwanego studenta z przedmiotu: ");
+    strcpy ( nazwisko, wczytajNapis( napis ) );
+    Osoba* student = wyszukajOsobe( glowy ->student, imie, nazwisko );
+    if ( student == NULL )
+    {
+        printf("Taki student nie istnieje!\n" );
+        getchar();
+    }
+    else
+    {
+        OsobaPrzedmiot* usuwany = wyszukajOsobaPrzedmiot( glowy ->studentPrzedmiot, student, przedmiot );
+        if ( !usuwany )
+        {
+            printf("Taka osoba nie widnieje na liscie!\n" );
+            getchar();
+        }
+        else
+            glowy ->studentPrzedmiot = usuwanieOsobaPrzedmiot( glowy ->studentPrzedmiot, usuwany );
+    }
+}
+
+void usunZprzedmiotuProwadzacego( Glowy* glowy, Przedmiot* przedm )
+{
+    OsobaPrzedmiot* x = glowy ->pracownikPrzedmiot;
+    Osoba* pracownik = NULL;
+    while ( x )
+    {
+        if ( x ->przedmiot == przedm )
+            pracownik = x ->osoba;
+        x = x ->nast;
+    }
+    if ( pracownik )
+    {
+        x = wyszukajOsobaPrzedmiot( glowy ->pracownikPrzedmiot, pracownik, przedm );
+        glowy ->pracownikPrzedmiot = usuwanieOsobaPrzedmiot( glowy ->pracownikPrzedmiot, x );
+    }
+}
+
