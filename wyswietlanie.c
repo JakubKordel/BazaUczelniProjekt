@@ -43,10 +43,10 @@ void wyswietlListeStudentow( Glowy* glowy )
             glowy ->student = wczytajOsobe( glowy ->student );
             break;
         case 'U':
-            wczytajUsuwanegoStudenta( glowy );
+            wczytajUsuwanaOsobe( glowy, 1 );
             break;
         case 'W':
-            wczytajStudentaDoWypisania( glowy );
+            wczytajOsobeDoWypisania( glowy, 1 );
             break;
         case 'e':
             break;
@@ -91,7 +91,7 @@ void wyswietlListePracownikow( Glowy* glowy )
             glowy ->pracownik = wczytajOsobe( glowy ->pracownik );
             break;
         case 'U':
-            wczytajUsuwanegoPracownika( glowy );
+            wczytajUsuwanaOsobe( glowy, 2 );
             break;
         case 'N':
             glowy ->pracownik = posortujWedlugNazwiska( glowy ->pracownik );
@@ -100,7 +100,7 @@ void wyswietlListePracownikow( Glowy* glowy )
             glowy ->pracownik = posortujWedlugImienia( glowy ->pracownik);
             break;
         case 'W':
-            wczytajPracownikaDoWypisania( glowy );
+            wczytajOsobeDoWypisania( glowy, 2 );
             break;
         case 'e':
             break;
@@ -186,7 +186,7 @@ void wypisStudent( Osoba* student, Glowy* glowy )
         switch ( wybor )
         {
         case 'P':
-            dajStudentowiPrzedmiot( glowy, student );
+            podepnijOsobeNaPrzedmiot( glowy, student, NULL, 1 );
             break;
         case 'U':
             usuwanieStudenta( glowy, student );
@@ -242,13 +242,13 @@ void wypisPrzedmiot( Przedmiot* przedmiot, Glowy* glowy )
         switch ( wybor )
         {
         case 'P':
-            dajPrzedmiotowiStudenta( glowy, przedmiot );
+            podepnijOsobeNaPrzedmiot( glowy, NULL, przedmiot, 1 );
             break;
         case 'U':
             usuwaniePrzedmiotu( glowy, przedmiot );
             break;
         case 'D':
-            dajPrzedmiotowiProwadzacego( glowy, przedmiot );
+            podepnijOsobeNaPrzedmiot( glowy, NULL, przedmiot, 2 );
             break;
         case 'u':
             usunZprzedmiotuStudenta( glowy, przedmiot );
@@ -294,7 +294,7 @@ void wypisPracownik( Glowy* glowy, Osoba* pracownik )
         switch ( wybor )
         {
         case 'D':
-            dajPracownikowiPrzedmiot( glowy, pracownik );
+            podepnijOsobeNaPrzedmiot( glowy, pracownik, NULL, 2 );
             break;
         case 'U':
             usuwaniePracownika( glowy, pracownik );

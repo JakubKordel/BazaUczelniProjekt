@@ -8,16 +8,10 @@
 
 Osoba* wczytajOsobe( Osoba* glowaOsoba );
 Przedmiot* wczytajPrzedmiot( Przedmiot* glowaPrzedmiot );
-void wczytajUsuwanegoStudenta( Glowy* glowy );
-void wczytajUsuwanegoPracownika( Glowy* glowy );
+void wczytajUsuwanaOsobe( Glowy* glowy, int typOsoby );
 void wczytajUsuwanyPrzedmiot( Glowy* glowy );
-OsobaPrzedmiot* podepnijStudentaNaPrzedmiot( OsobaPrzedmiot* glowa, Osoba* student, Przedmiot* przedm );
-void dajStudentowiPrzedmiot( Glowy* glowy, Osoba* student );
-void dajPrzedmiotowiStudenta( Glowy* glowy, Przedmiot *przedmiot );
-void dajPrzedmiotowiProwadzacego( Glowy* glowy, Przedmiot *przedmiot );
-void dajPracownikowiPrzedmiot( Glowy* glowy, Osoba* pracownik );
-void wczytajStudentaDoWypisania( Glowy* glowy );
-void wczytajPracownikaDoWypisania( Glowy* glowy );
+void podepnijOsobeNaPrzedmiot( Glowy *glowy, Osoba* osoba, Przedmiot* przedm, int typOsoby );
+void wczytajOsobeDoWypisania( Glowy* glowy, int typOsoby );
 void wczytajPrzedmiotDoWypisania( Glowy* glowy );
 void usunZprzedmiotuStudenta( Glowy* glowy, Przedmiot* przedmiot );
 void usunZprzedmiotuProwadzacego( Glowy* glowy, Przedmiot* przedm );

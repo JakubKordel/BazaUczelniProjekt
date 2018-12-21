@@ -35,42 +35,38 @@ Przedmiot* wczytajPrzedmiot( Przedmiot* glowaPrzedmiot )
     return glowaPrzedmiot;
 }
 
-void wczytajUsuwanegoStudenta( Glowy* glowy )
+void wczytajUsuwanaOsobe( Glowy* glowy, int typOsoby )
 {
     char imie[ MAX ];
     char nazwisko[ MAX ];
     char napis[ MAX ];
-    printf("Podaj imie usuwanego studenta: ");
+    if ( typOsoby == 1 )
+        printf("Podaj imie usuwanego studenta: ");
+    if ( typOsoby == 2 )
+        printf("Podaj imie usuwanego pracownika: ");
     strcpy ( imie, wczytajNapis( napis ) );
-    printf("Podaj nazwisko usuwanego studenta: ");
+    if ( typOsoby == 1 )
+        printf("Podaj nazwisko usuwanego studenta: ");
+    if ( typOsoby == 2 )
+        printf("Podaj nazwisko usuwanego pracownika: ");
     strcpy ( nazwisko, wczytajNapis( napis ) );
-    Osoba* usuwany = wyszukajOsobe( glowy ->student, imie, nazwisko );
+    Osoba* usuwany = NULL;
+    if ( typOsoby == 1 )
+        usuwany = wyszukajOsobe( glowy ->student, imie, nazwisko );
+    if ( typOsoby == 2 )
+        usuwany = wyszukajOsobe( glowy ->pracownik, imie, nazwisko );
     if ( !usuwany )
     {
         printf("Taka osoba nie istnieje!\n" );
         getchar();
     }
     else
-        usuwanieStudenta( glowy, usuwany );
-}
-
-void wczytajUsuwanegoPracownika( Glowy* glowy )
-{
-    char imie[ MAX ];
-    char nazwisko[ MAX ];
-    char napis[ MAX ];
-    printf("Podaj imie usuwanego pracownika: ");
-    strcpy ( imie, wczytajNapis( napis ) );
-    printf("Podaj nazwisko usuwanego pracownika: ");
-    strcpy ( nazwisko, wczytajNapis( napis ) );
-    Osoba* usuwany = wyszukajOsobe( glowy ->pracownik, imie, nazwisko );
-    if ( !usuwany )
     {
-        printf("Taka osoba nie istnieje!\n" );
-        getchar();
+        if ( typOsoby == 1 )
+            usuwanieStudenta( glowy, usuwany );
+        if ( typOsoby == 2 )
+            usuwaniePracownika( glowy, usuwany );
     }
-    else
-        usuwaniePracownika( glowy, usuwany );
 }
 
 void wczytajUsuwanyPrzedmiot( Glowy* glowy )
@@ -89,197 +85,112 @@ void wczytajUsuwanyPrzedmiot( Glowy* glowy )
         usuwaniePrzedmiotu( glowy, usuwany );
 }
 
-OsobaPrzedmiot* podepnijStudentaNaPrzedmiot( OsobaPrzedmiot* glowa, Osoba* studentGlowa, Przedmiot* przedmGlowa )
+void podepnijOsobeNaPrzedmiot( Glowy *glowy, Osoba* osoba, Przedmiot* przedm, int typOsoby )
 {
     char imie[ MAX ];
     char nazwisko[ MAX ];
     char nazwa[ MAX ];
     char napis[ MAX ];
-    printf("Podaj imie podpinanego na przedmiot studenta: ");
-    strcpy ( imie, wczytajNapis(napis) );
-    printf("Podaj nazwisko podpinanego na przedmiot studenta: ");
-    strcpy ( nazwisko, wczytajNapis( napis ) );
-    Osoba* student = wyszukajOsobe( studentGlowa, imie, nazwisko );
-    if ( student == NULL )
+    int blad = 0 ;
+    if ( osoba == NULL )
     {
-        printf("Taki student nie istnieje!\n" );
-        getchar();
-        return glowa;
+        if ( typOsoby == 1 )
+            printf("Podaj imie podpinanego na przedmiot studenta: ");
+        if ( typOsoby == 2 )
+            printf("Podaj imie prowadzacego, ktory ma prowadzic przedmiot: ");
+        strcpy ( imie, wczytajNapis(napis) );
+        if ( typOsoby == 1 )
+            printf("Podaj nazwisko podpinanego na przedmiot studenta: ");
+        if ( typOsoby == 2 )
+            printf("Podaj nazwisko prowadzacego, ktory ma prowadzic przedmiot: ");
+        strcpy ( nazwisko, wczytajNapis( napis ) );
+        if ( typOsoby == 1 )
+            osoba = wyszukajOsobe( glowy ->student, imie, nazwisko );
+        if ( typOsoby == 2 )
+            osoba = wyszukajOsobe( glowy ->pracownik, imie, nazwisko );
+        if ( osoba == NULL )
+        {
+            if ( typOsoby == 1 )
+                printf("Taki student nie istnieje!\n" );
+            if ( typOsoby == 2 )
+                printf("Taki pracownik nie istnieje!\n" );
+            getchar();
+            blad = 1;
+        }
     }
-    printf("Podaj nazwe przedmiotu: ");
-    strcpy ( nazwa, wczytajNapis( napis ) );
-    Przedmiot* przedmiot = wyszukajPrzedmiot( przedmGlowa, nazwa );
-    if ( przedmiot == NULL )
+    if ( przedm == NULL && blad == 0 )
     {
-        printf("Taki przedmiot nie istnieje!\n" );
-        getchar();
-        return glowa;
+        printf("Podaj nazwe przedmiotu: ");
+        strcpy ( nazwa, wczytajNapis( napis ) );
+        przedm = wyszukajPrzedmiot( glowy ->przedmiot, nazwa );
+        if ( przedm == NULL )
+        {
+            printf("Taki przedmiot nie istnieje!\n" );
+            getchar();
+            blad = 1;
+        }
     }
-    if ( wyszukajOsobaPrzedmiot( glowa, student, przedmiot ) )
+    if ( typOsoby == 1 && blad == 0 )
     {
-        printf("Student juz jest zapisany na ten przedmiot!\n" );
-        getchar();
-        return glowa;
-    }
-    glowa = dodajOsobaPrzedmiot( glowa, student, przedmiot );
-    return glowa;
-}
-
-void dajStudentowiPrzedmiot( Glowy* glowy, Osoba* student )
-{
-    char nazwa[ MAX ];
-    char napis[ MAX ];
-    printf("Podaj nazwe przedmiotu: ");
-    strcpy ( nazwa, wczytajNapis( napis ) );
-    Przedmiot* przedmiot = wyszukajPrzedmiot( glowy ->przedmiot, nazwa );
-    if ( przedmiot == NULL )
-    {
-        printf("Taki przedmiot nie istnieje!\n" );
-        getchar();
-    }
-    else
-    {
-        if ( wyszukajOsobaPrzedmiot( glowy ->studentPrzedmiot, student, przedmiot ) )
+        if ( wyszukajOsobaPrzedmiot( glowy ->studentPrzedmiot, osoba, przedm ) && blad == 0 )
         {
             printf("Student juz jest zapisany na ten przedmiot!\n" );
             getchar();
+            blad = 1;
         }
-        else
-            glowy ->studentPrzedmiot = dodajOsobaPrzedmiot( glowy ->studentPrzedmiot, student, przedmiot );
+        if ( blad == 0 )
+            glowy ->studentPrzedmiot = dodajOsobaPrzedmiot( glowy ->studentPrzedmiot, osoba, przedm );
+    }
+    if ( typOsoby == 2 && blad == 0 )
+    {
+        OsobaPrzedmiot* x = glowy ->pracownikPrzedmiot;
+        while ( x )
+        {
+            if ( x ->przedmiot == przedm )
+            {
+                printf("Ten przedmiot ma juz prowadzacego!\n" );
+                getchar();
+                blad = 1;
+            }
+            x = x ->nast;
+        }
+        if ( blad == 0)
+            glowy ->pracownikPrzedmiot = dodajOsobaPrzedmiot( glowy ->pracownikPrzedmiot, osoba, przedm );
     }
 }
 
-void dajPrzedmiotowiStudenta( Glowy* glowy, Przedmiot *przedmiot )
+void wczytajOsobeDoWypisania( Glowy* glowy, int typOsoby )
 {
     char imie[ MAX ];
     char nazwisko[ MAX ];
     char napis[ MAX ];
-    printf("Podaj imie podpinanego na przedmiot studenta: ");
+    if ( typOsoby == 1 )
+        printf("Podaj imie studenta: ");
+    if ( typOsoby == 2 )
+        printf("Podaj imie pracownika: ");
     strcpy ( imie, wczytajNapis(napis) );
-    printf("Podaj nazwisko podpinanego na przedmiot studenta: ");
+    if ( typOsoby == 1 )
+        printf("Podaj nazwisko studenta: ");
+    if ( typOsoby == 2 )
+        printf("Podaj nazwisko pracownika: ");
     strcpy ( nazwisko, wczytajNapis( napis ) );
-    Osoba* student = wyszukajOsobe( glowy ->student, imie, nazwisko );
-    if ( student == NULL )
+    Osoba* osoba = NULL;
+    if ( typOsoby == 1 )
+        osoba = wyszukajOsobe( glowy ->student, imie, nazwisko );
+    if ( typOsoby == 2 )
+        osoba = wyszukajOsobe( glowy ->pracownik, imie, nazwisko );
+    if ( osoba == NULL )
     {
-        printf("Taki student nie istnieje!\n" );
-        getchar();
-    }
-    else
-    {
-        if ( wyszukajOsobaPrzedmiot( glowy ->studentPrzedmiot, student, przedmiot ) )
-        {
-            printf("Student juz jest zapisany na ten przedmiot!\n" );
-            getchar();
-        }
-        else
-            glowy ->studentPrzedmiot = dodajOsobaPrzedmiot( glowy ->studentPrzedmiot, student, przedmiot );
-    }
-}
-
-void dajPrzedmiotowiProwadzacego( Glowy* glowy, Przedmiot *przedmiot )
-{
-    char imie[ MAX ];
-    char nazwisko[ MAX ];
-    char napis[ MAX ];
-    printf("Podaj imie pracownika: ");
-    strcpy ( imie, wczytajNapis(napis) );
-    printf("Podaj nazwisko pracownika: ");
-    strcpy ( nazwisko, wczytajNapis( napis ) );
-    Osoba* pracownik = wyszukajOsobe( glowy ->pracownik, imie, nazwisko );
-    int flaga = 0;
-    if ( pracownik == NULL )
-    {
-        printf("Taki pracownik nie istnieje!\n" );
-        getchar();
-        flaga = 1;
-    }
-    OsobaPrzedmiot* x = glowy ->pracownikPrzedmiot;
-    while ( x && flaga == 0 )
-    {
-        if ( x ->przedmiot == przedmiot )
-        {
-            printf("Ten przedmiot ma juz prowadzacego!\n" );
-            getchar();
-            flaga = 1;
-        }
-        x = x ->nast;
-    }
-    if ( flaga == 0)
-        glowy ->pracownikPrzedmiot = dodajOsobaPrzedmiot( glowy ->pracownikPrzedmiot, pracownik, przedmiot );
-}
-
-void dajPracownikowiPrzedmiot( Glowy* glowy, Osoba* pracownik )
-{
-    char nazwa[ MAX ];
-    char napis[ MAX ];
-    printf("Podaj nazwe przedmiotu ktory ma prowadzic pracownik: ");
-    strcpy ( nazwa, wczytajNapis( napis ) );
-    Przedmiot* przedmiot = wyszukajPrzedmiot( glowy ->przedmiot, nazwa );
-    int flaga = 0;
-    if ( przedmiot == NULL )
-    {
-        printf("Taki przedmiot nie istnieje!\n" );
-        getchar();
-        flaga = 1;
-    }
-    OsobaPrzedmiot* x = glowy ->pracownikPrzedmiot;
-    while ( x && flaga == 0 )
-    {
-        if ( x ->przedmiot == przedmiot )
-        {
-            printf("Ten przedmiot ma juz prowadzacego!\n" );
-            getchar();
-            flaga = 1;
-        }
-        x = x ->nast;
-    }
-    if ( flaga == 0)
-        glowy ->pracownikPrzedmiot = dodajOsobaPrzedmiot( glowy ->pracownikPrzedmiot, pracownik, przedmiot );
-
-}
-
-void wczytajStudentaDoWypisania( Glowy* glowy )
-{
-    char imie[ MAX ];
-    char nazwisko[ MAX ];
-    char napis[ MAX ];
-    printf("Podaj imie studenta: ");
-    strcpy ( imie, wczytajNapis(napis) );
-    printf("Podaj nazwisko studenta: ");
-    strcpy ( nazwisko, wczytajNapis( napis ) );
-    Osoba* student = wyszukajOsobe( glowy ->student, imie, nazwisko );
-    if ( student == NULL )
-    {
-        printf("Taki student nie istnieje!\n" );
+        printf("Taka osoba nie istnieje!\n" );
         getchar();
     }
     else
     {
         wyczyscEkran();
-        wypisStudent( student, glowy );
-        getchar();
-    }
-}
-
-void wczytajPracownikaDoWypisania( Glowy* glowy )
-{
-    char imie[ MAX ];
-    char nazwisko[ MAX ];
-    char napis[ MAX ];
-    printf("Podaj imie pracownika: ");
-    strcpy ( imie, wczytajNapis(napis) );
-    printf("Podaj nazwisko pracownika: ");
-    strcpy ( nazwisko, wczytajNapis( napis ) );
-    Osoba* pracownik = wyszukajOsobe( glowy ->pracownik, imie, nazwisko );
-    if ( pracownik == NULL )
-    {
-        printf("Taki pracownik nie istnieje!\n" );
-        getchar();
-    }
-    else
-    {
-        wyczyscEkran();
-        wypisPracownik( glowy, pracownik );
+        if ( typOsoby == 1 )
+            wypisStudent( osoba, glowy );
+        if ( typOsoby == 2 )
+            wypisPracownik( glowy, osoba );
         getchar();
     }
 }
