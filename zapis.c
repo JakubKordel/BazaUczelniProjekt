@@ -60,6 +60,16 @@ void zapiszBaze( Glowy* glowy, char* nazwaPliku )
 
 void wczytajBaze( Glowy* glowy, char* nazwaPliku )
 {
+    zwolnijOsoba( glowy ->student );
+    zwolnijOsoba( glowy ->pracownik );
+    zwolnijPrzedmiot( glowy ->przedmiot );
+    zwolnijOsobaPrzedmiot( glowy ->studentPrzedmiot );
+    zwolnijOsobaPrzedmiot( glowy ->pracownikPrzedmiot );
+    glowy ->pracownik = NULL;
+    glowy ->student = NULL;
+    glowy ->przedmiot = NULL;
+    glowy ->pracownikPrzedmiot = NULL;
+    glowy ->studentPrzedmiot = NULL;
     char imie[ MAX ];
     char nazwisko[ MAX ];
     char nazwa[ MAX ];

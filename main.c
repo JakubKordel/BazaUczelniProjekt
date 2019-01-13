@@ -14,6 +14,7 @@ int main()
     Glowy* glowy = malloc( sizeof( Glowy ) );
     glowy ->pracownik = NULL;
     glowy ->student = NULL;
+    glowy ->przedmiot = NULL;
     glowy ->pracownikPrzedmiot = NULL;
     glowy ->studentPrzedmiot = NULL;
     printf("WITAJ W BAZIE UCZELNI!\n");
