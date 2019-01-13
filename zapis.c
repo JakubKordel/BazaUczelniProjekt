@@ -29,11 +29,32 @@ void zapiszBaze( Glowy* glowy, char* nazwaPliku )
     }
     fprintf( fp, "*PRZEDMIOTY*\n" );
     while ( przedmiot != NULL )
+    {
+        fprintf( fp, "%s\n", przedmiot ->nazwa );
+        przedmiot  = przedmiot ->nast;
+    }
+    fprintf( fp, ".\n" );
+    OsobaPrzedmiot* relacja = NULL;
+    for ( int i = 0; i < 2; ++i )
+    {
+        if  ( i == 0 )
         {
-            fprintf( fp, "%s\n", przedmiot ->nazwa );
-            przedmiot  = przedmiot ->nast;
+            fprintf( fp, "*STUDENT-PRZEDMIOT*\n" );
+            relacja = glowy ->studentPrzedmiot;
+        }
+        else
+        {
+            fprintf( fp, "*PRACOWNIK-PRZEDMIOT*\n" );
+            relacja = glowy ->pracownikPrzedmiot;
+        }
+        while ( relacja != NULL )
+        {
+            fprintf( fp, "%d\n", relacja ->osoba ->id );
+            fprintf( fp, "%s\n", relacja ->przedmiot ->nazwa );
+            relacja = relacja ->nast;
         }
         fprintf( fp, ".\n" );
+    }
     fclose( fp );
 }
 
@@ -68,11 +89,35 @@ void wczytajBaze( Glowy* glowy, char* nazwaPliku )
     }
     strcpy( znacznik, "*PRZEDMIOTY*" );
     while ( fscanf( fp, "%s ", linia ) && porownajNapisy( linia, znacznik ) == 0 )
-        {
-        }
+    {
+    }
     while ( fscanf( fp, "%s ", nazwa ) && porownajNapisy( nazwa, "." ) == 0)
+    {
+        glowy ->przedmiot = dodajPrzedmiot( glowy ->przedmiot, nazwa );
+    }
+    for ( int i = 0; i < 2; ++i )
+    {
+        if  ( i == 0 )
+            strcpy(znacznik, "*STUDENT-PRZEDMIOT*");
+        if ( i == 1 )
+            strcpy(znacznik, "*PRACOWNIK-PRZEDMIOT*");
+        while ( fscanf( fp, "%s ", linia ) && porownajNapisy( linia, znacznik ) == 0 )
         {
-            glowy ->przedmiot = dodajPrzedmiot( glowy ->przedmiot, nazwa );
         }
+        while ( fscanf( fp, "%d ", &id ) )
+        {
+            fscanf( fp, "%s ", nazwa );
+            if  ( i == 0 )
+            {
+                glowy ->studentPrzedmiot = dodajOsobaPrzedmiot(
+                glowy ->studentPrzedmiot, wyszukajOsobeWedlugId( glowy ->student, id ), wyszukajPrzedmiot( glowy->przedmiot, nazwa ) );
+            }
+            if ( i == 1 )
+            {
+                glowy ->pracownikPrzedmiot = dodajOsobaPrzedmiot(
+                glowy ->pracownikPrzedmiot, wyszukajOsobeWedlugId( glowy ->pracownik, id ), wyszukajPrzedmiot( glowy->przedmiot, nazwa ) );
+            }
+        }
+    }
     fclose( fp );
 }

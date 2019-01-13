@@ -11,6 +11,17 @@ Osoba* wyszukajOsobe( Osoba* glowa, char im[ MAX ], char nazw[ MAX ] )
     return glowa;
 }
 
+Osoba* wyszukajOsobeWedlugId( Osoba* glowa, int parametrId )
+{
+    while ( glowa != NULL )
+    {
+        if ( parametrId == glowa ->id )
+            return glowa;
+        glowa = glowa ->nast;
+    }
+    return glowa;
+}
+
 Osoba* poprzednikOsoby( Osoba* glowa, Osoba* osoba)
 {
     Osoba* poprzednik = NULL;
