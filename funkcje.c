@@ -1,7 +1,6 @@
 #include "funkcje.h"
 #include <stdlib.h>
 
-
 void zwolnijOsoba( Osoba* glowa )
 {
     Osoba* poprzedni = NULL;

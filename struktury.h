@@ -35,7 +35,7 @@ typedef struct Glowy
 } Glowy;
 
 
-Osoba* dodajOsobe( Osoba* glowa, char imie[ MAX ], char nazwisko[ MAX ] );
+Osoba* dodajOsobe( Osoba* glowa, char imie[ MAX ], char nazwisko[ MAX ], int id );
 Przedmiot* dodajPrzedmiot( Przedmiot* glowaPrzedmiot, char nazwa[ MAX ] );
 OsobaPrzedmiot* dodajOsobaPrzedmiot( OsobaPrzedmiot* glowaOsobaPrzedmiot, Osoba* osoba, Przedmiot* przedmiot );
 

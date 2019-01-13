@@ -7,6 +7,7 @@
 #include "wyswietlanie.h"
 #include "uzytkownik.h"
 #include "sortowanie.h"
+#include "zapis.h"
 
 int main()
 {
@@ -35,6 +36,12 @@ int main()
             wyswietlListePrzedmiotow( glowy );
             break;
         case 'e':
+            break;
+        case 'z':
+            zapiszBaze( glowy, "baza.txt" );
+            break;
+        case 'w':
+            wczytajBaze( glowy, "baza.txt" );
             break;
         default:
             printf("Nieprawidlowy znak\n");

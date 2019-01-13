@@ -1,9 +1,12 @@
 #include "struktury.h"
 
-Osoba* dodajOsobe( Osoba* glowa, char im[ MAX ], char nazw[ MAX ] )
+Osoba* dodajOsobe( Osoba* glowa, char im[ MAX ], char nazw[ MAX ], int id )
 {
     Osoba* nowaOsoba = malloc( sizeof( Osoba ) );
-    nowaOsoba ->id = znajdzMaxId( glowa ) + 1 ;
+    if ( id == 0 )
+        nowaOsoba ->id = znajdzMaxId( glowa ) + 1 ;
+    else
+        nowaOsoba ->id = id;
     strcpy ( nowaOsoba ->imie, im );
     strcpy ( nowaOsoba ->nazwisko, nazw );
     nowaOsoba ->nast = glowa;

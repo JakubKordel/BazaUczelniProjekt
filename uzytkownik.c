@@ -15,7 +15,7 @@ Osoba* wczytajOsobe( Osoba* glowaOsoba )
         getchar();
         return glowaOsoba;
     }
-    glowaOsoba = dodajOsobe( glowaOsoba, imie, nazwisko );
+    glowaOsoba = dodajOsobe( glowaOsoba, imie, nazwisko, 0 );
     return glowaOsoba;
 }
 
