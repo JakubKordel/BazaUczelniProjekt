@@ -308,5 +308,75 @@ void wypisPracownik( Glowy* glowy, Osoba* pracownik )
         }
         wyczyscEkran();
     }
-
 }
+
+void menuWczytywania ( Glowy* glowy )
+{
+    wyczyscEkran();
+    printf( "Pliki z bazami:\n ");
+    zwolnijNazwaPliku( glowy ->nazwaPliku );
+    glowy ->nazwaPliku = NULL;
+    wczytajNazwyPlikow( glowy );
+    NazwaPliku* pliki = glowy ->nazwaPliku;
+    int numer;
+    int i = 1;
+    while ( pliki )
+    {
+        printf( "%d. %s\n", i, pliki ->nazwa );
+        pliki = pliki ->nast;
+        ++i;
+    }
+    printf( "\nPodaj numer pliku z baza, ktora chcesz wczytac\n" );
+    printf( "Inny klawisz aby wrocic\n" );
+    if ( scanf( "%d", &numer ) )
+    {
+        printf("test");
+        fflush(stdout);
+        wyczyscBuf();
+        i = 1;
+        pliki = glowy ->nazwaPliku;
+        printf("test");
+        while ( pliki && i < numer+1 )
+        {
+            if ( numer == i )
+            {
+                printf("test");
+                if ( czyPlikPoprawny( pliki ->nazwa ) )
+                    wczytajBaze( glowy, pliki ->nazwa );
+                else
+                {
+                    printf("Plik uszkodzony!");
+                    getchar();
+                }
+            }
+            pliki = pliki ->nast;
+            ++i;
+        }
+    }
+    else
+    printf (" lol ");
+}
+
+void menuZapisywania( Glowy* glowy )
+{
+    wyczyscEkran();
+    zwolnijNazwaPliku( glowy ->nazwaPliku );
+    glowy ->nazwaPliku = NULL;
+    wczytajNazwyPlikow( glowy );
+    NazwaPliku* pliki = glowy ->nazwaPliku;
+    char nazwa[ MAX ];
+    while ( pliki )
+    {
+        printf( "%s\n", pliki ->nazwa );
+        pliki = pliki ->nast;
+    }
+    printf( "\nPodaj nazwe zapisu (bez rozszerzenia), mozesz wybrac jeden z powyzszych lub nowy:\n\n" );
+    scanf( "%s", nazwa );
+    wyczyscBuf();
+    if ( strlen( nazwa ) < MAX - 5 )
+    {
+        strcat( nazwa, ".ucb");
+        zapiszBaze( glowy, nazwa );
+    }
+}
+

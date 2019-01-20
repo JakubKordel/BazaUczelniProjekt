@@ -11,4 +11,5 @@ void rysujPrzerwe();
 char* wczytajNapis();
 int porownajNapisy( char pierwszy[ MAX ], char drugi[ MAX ] );
 int czyNapisyKolejneAlfabetycznie( char pierwszy[ MAX ], char drugi[ MAX ]);
+int czyPrawidloweRozszerzenie( char nazwa[ MAX ] );
 

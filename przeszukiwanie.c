@@ -116,3 +116,14 @@ int znajdzMaxId( Osoba* glowa )
     }
     return idMax;
 }
+
+NazwaPliku* wyszukajNazwePliku( NazwaPliku* glowa, char nazw[ MAX ] )
+{
+    while ( glowa != NULL )
+    {
+        if ( porownajNapisy( glowa ->nazwa, nazw ) )
+            return glowa;
+        glowa = glowa ->nast;
+    }
+    return glowa;
+}

@@ -120,14 +120,30 @@ void wczytajBaze( Glowy* glowy, char* nazwaPliku )
             if  ( i == 0 )
             {
                 glowy ->studentPrzedmiot = dodajOsobaPrzedmiot(
-                glowy ->studentPrzedmiot, wyszukajOsobeWedlugId( glowy ->student, id ), wyszukajPrzedmiot( glowy->przedmiot, nazwa ) );
+                                               glowy ->studentPrzedmiot, wyszukajOsobeWedlugId( glowy ->student, id ), wyszukajPrzedmiot( glowy->przedmiot, nazwa ) );
             }
             if ( i == 1 )
             {
                 glowy ->pracownikPrzedmiot = dodajOsobaPrzedmiot(
-                glowy ->pracownikPrzedmiot, wyszukajOsobeWedlugId( glowy ->pracownik, id ), wyszukajPrzedmiot( glowy->przedmiot, nazwa ) );
+                                                 glowy ->pracownikPrzedmiot, wyszukajOsobeWedlugId( glowy ->pracownik, id ), wyszukajPrzedmiot( glowy->przedmiot, nazwa ) );
             }
         }
     }
     fclose( fp );
 }
+
+void wczytajNazwyPlikow( Glowy* glowy )
+{
+    zwolnijNazwaPliku( glowy ->nazwaPliku );
+    DIR* strumien = opendir( "." );
+    struct dirent* nazwy = readdir( strumien );
+    while ( nazwy != NULL )
+    {
+        if ( czyPrawidloweRozszerzenie( nazwy ->d_name ) )
+        {
+            glowy ->nazwaPliku = dodajNazwaPliku( glowy ->nazwaPliku, nazwy ->d_name );
+        }
+        nazwy = readdir( strumien );
+    }
+}
+

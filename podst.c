@@ -58,3 +58,10 @@ int czyNapisyKolejneAlfabetycznie( char pierwszy[ MAX ], char drugi[ MAX ] )
     }
     return 2;
 }
+
+int czyPrawidloweRozszerzenie( char nazwa[ MAX ] )
+{
+    if ( strstr( nazwa, ".ucb" ) )
+        return 1;
+    return 0;
+}

@@ -17,6 +17,7 @@ int main()
     glowy ->przedmiot = NULL;
     glowy ->pracownikPrzedmiot = NULL;
     glowy ->studentPrzedmiot = NULL;
+    glowy ->nazwaPliku = NULL;
     printf("WITAJ W BAZIE UCZELNI!\n");
     rysujPrzerwe();
     char wybor;
@@ -36,13 +37,25 @@ int main()
         case 'R':
             wyswietlListePrzedmiotow( glowy );
             break;
+        case 'W':
+            menuWczytywania( glowy );
+            break;
+         case 'Z':
+            menuZapisywania( glowy );
+            break;
         case 'e':
             break;
-        case 'z':
-            zapiszBaze( glowy, "baza.txt" );
-            break;
-        case 'w':
-            wczytajBaze( glowy, "baza.txt" );
+        case 'C':
+            zwolnijOsoba( glowy ->student );
+            zwolnijOsoba( glowy ->pracownik );
+            zwolnijPrzedmiot( glowy ->przedmiot );
+            zwolnijOsobaPrzedmiot( glowy ->studentPrzedmiot );
+            zwolnijOsobaPrzedmiot( glowy ->pracownikPrzedmiot );
+            glowy ->pracownik = NULL;
+            glowy ->student = NULL;
+            glowy ->przedmiot = NULL;
+            glowy ->pracownikPrzedmiot = NULL;
+            glowy ->studentPrzedmiot = NULL;
             break;
         default:
             printf("Nieprawidlowy znak\n");
@@ -56,6 +69,7 @@ int main()
     zwolnijPrzedmiot( glowy ->przedmiot );
     zwolnijOsobaPrzedmiot( glowy ->studentPrzedmiot );
     zwolnijOsobaPrzedmiot( glowy ->pracownikPrzedmiot );
+    zwolnijNazwaPliku( glowy ->nazwaPliku );
     free( glowy );
     return 0;
 }

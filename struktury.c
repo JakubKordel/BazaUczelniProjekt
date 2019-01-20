@@ -1,4 +1,5 @@
 #include "struktury.h"
+#include "przeszukiwanie.h"
 
 Osoba* dodajOsobe( Osoba* glowa, char im[ MAX ], char nazw[ MAX ], int id )
 {
@@ -28,4 +29,12 @@ OsobaPrzedmiot* dodajOsobaPrzedmiot( OsobaPrzedmiot* glowaOsobaPrzedmiot, Osoba*
     nowyOsobaPrzedmiot ->przedmiot = przedm;
     nowyOsobaPrzedmiot ->nast = glowaOsobaPrzedmiot;
     return nowyOsobaPrzedmiot;
+}
+
+NazwaPliku* dodajNazwaPliku( NazwaPliku* glowa, char nazw[ MAX ] )
+{
+    NazwaPliku* nowaNazwa = malloc( sizeof( NazwaPliku ) );
+    strcpy ( nowaNazwa ->nazwa, nazw );
+    nowaNazwa ->nast = glowa;
+    return nowaNazwa;
 }

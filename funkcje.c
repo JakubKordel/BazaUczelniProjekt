@@ -32,7 +32,16 @@ void zwolnijOsobaPrzedmiot( OsobaPrzedmiot* glowa )
         glowa = glowa -> nast;
         free( poprzedni );
     }
-
 }
 
+void zwolnijNazwaPliku( NazwaPliku* glowa )
+{
+    NazwaPliku* poprzedni = NULL;
+    while( glowa )
+    {
+        poprzedni = glowa;
+        glowa = glowa -> nast;
+        free( poprzedni );
+    }
+}
 

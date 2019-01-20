@@ -6,10 +6,6 @@
 #include "stdlib.h"
 #include "stdio.h"
 #include "string.h"
-#include "dirent.h"
 #include "podst.h"
 
-void zapiszBaze( Glowy* glowy, char* nazwaPliku );
-void wczytajBaze( Glowy* glowy, char* nazwaPliku );
-void wczytajNazwyPlikow( Glowy* glowy );
-
+int czyPlikPoprawny ( char nazwa[ MAX ] );
