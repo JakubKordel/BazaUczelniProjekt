@@ -330,17 +330,13 @@ void menuWczytywania ( Glowy* glowy )
     printf( "Inny klawisz aby wrocic\n" );
     if ( scanf( "%d", &numer ) )
     {
-        printf("test");
-        fflush(stdout);
         wyczyscBuf();
         i = 1;
         pliki = glowy ->nazwaPliku;
-        printf("test");
         while ( pliki && i < numer+1 )
         {
             if ( numer == i )
             {
-                printf("test");
                 if ( czyPlikPoprawny( pliki ->nazwa ) )
                     wczytajBaze( glowy, pliki ->nazwa );
                 else
@@ -353,8 +349,6 @@ void menuWczytywania ( Glowy* glowy )
             ++i;
         }
     }
-    else
-    printf (" lol ");
 }
 
 void menuZapisywania( Glowy* glowy )

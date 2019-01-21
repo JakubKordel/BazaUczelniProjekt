@@ -3,12 +3,10 @@
 int czyPlikPoprawny ( char nazwaPliku[ MAX ] )
 {
     FILE *fp = NULL;
-    printf("test");
     fp = fopen( nazwaPliku, "r");
     char linia[MAX];
     int numer;
-    printf("test");
-    while ( fscanf( fp, "%s", linia ) && !porownajNapisy( linia, "") )
+    while ( fscanf( fp, "%s", linia ) != 0 && feof( fp ) == 0 )
     {
         if ( strlen( linia ) > MAX - 4 )
         {
@@ -17,14 +15,13 @@ int czyPlikPoprawny ( char nazwaPliku[ MAX ] )
         }
     }
     fclose( fp );
-    printf("test");
     fp = fopen( nazwaPliku, "r");
-    if ( !fscanf( fp, "%s", linia ) || !porownajNapisy( linia, "*STUDENCI*") )
+    if ( !fscanf( fp, "%s", linia ) || !porownajNapisy( linia, "*STUDENCI*")  )
     {
         fclose( fp );
         return 0;
     }
-    while ( fscanf( fp, "%s", linia ) && !porownajNapisy( linia, "." ) && !porownajNapisy( linia, "") )
+    while ( fscanf( fp, "%s", linia ) && !porownajNapisy( linia, "." ) && feof( fp ) == 0 )
     {
         if ( !fscanf( fp, "%s", linia ) )
         {
@@ -37,7 +34,7 @@ int czyPlikPoprawny ( char nazwaPliku[ MAX ] )
             return 0;
         }
     }
-    if ( !porownajNapisy( linia, ".") )
+    if ( !porownajNapisy( linia, "." ) )
     {
         fclose( fp );
         return 0;
@@ -47,7 +44,7 @@ int czyPlikPoprawny ( char nazwaPliku[ MAX ] )
         fclose( fp );
         return 0;
     }
-    while ( fscanf( fp, "%s", linia ) && !porownajNapisy( linia, "." ) && !porownajNapisy( linia, "") )
+    while ( fscanf( fp, "%s", linia ) && !porownajNapisy( linia, "." ) && feof( fp ) == 0 )
     {
         if ( !fscanf( fp, "%s", linia ) )
         {
@@ -60,7 +57,7 @@ int czyPlikPoprawny ( char nazwaPliku[ MAX ] )
             return 0;
         }
     }
-    if ( !porownajNapisy( linia, ".") )
+    if ( !porownajNapisy( linia, "." ) )
     {
         fclose( fp );
         return 0;
@@ -70,15 +67,15 @@ int czyPlikPoprawny ( char nazwaPliku[ MAX ] )
         fclose( fp );
         return 0;
     }
-    while ( fscanf( fp, "%s", linia ) && !porownajNapisy( linia, "." ) && !porownajNapisy( linia, "") )
+    while ( fscanf( fp, "%s", linia ) && !porownajNapisy( linia, "." ) && feof( fp ) == 0 )
     {
     }
-    if ( !porownajNapisy( linia, ".") || !fscanf( fp, "%s ", linia ) || !porownajNapisy( linia, "*STUDENT-PRZEDMIOT*") )
+    if ( !fscanf( fp, "%s ", linia ) || !porownajNapisy( linia, "*STUDENT-PRZEDMIOT*") )
     {
         fclose( fp );
         return 0;
     }
-    while ( fscanf( fp, "%d", &numer ) && !porownajNapisy( linia, "." ) && !porownajNapisy( linia, "" ) )
+    while ( fscanf( fp, "%d", &numer ) && feof( fp ) == 0 )
     {
         if ( !fscanf( fp, "%s", linia ) )
         {
@@ -86,17 +83,17 @@ int czyPlikPoprawny ( char nazwaPliku[ MAX ] )
             return 0;
         }
     }
-    if ( !porownajNapisy( linia, ".") )
+    if ( fscanf( fp, "%s", linia ) && !porownajNapisy( linia, ".") )
     {
         fclose( fp );
         return 0;
     }
-    if ( !porownajNapisy( linia, ".") || !fscanf( fp, "%s", linia ) || !porownajNapisy( linia, "*PRACOWNIK-PRZEDMIOT*") )
+    if ( !fscanf( fp, "%s", linia ) || !porownajNapisy( linia, "*PRACOWNIK-PRZEDMIOT*") )
     {
         fclose( fp );
         return 0;
     }
-    while ( fscanf( fp, "%d", &numer ) && !porownajNapisy( linia, "." ) && !porownajNapisy( linia, "") )
+    while ( fscanf( fp, "%d", &numer ) && feof( fp ) == 0 )
     {
         if ( !fscanf( fp, "%s", linia ) )
         {
@@ -104,7 +101,7 @@ int czyPlikPoprawny ( char nazwaPliku[ MAX ] )
             return 0;
         }
     }
-    if ( !porownajNapisy( linia, ".") )
+    if ( fscanf( fp, "%s", linia ) && !porownajNapisy( linia, "." ) )
     {
         fclose( fp );
         return 0;

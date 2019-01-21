@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include <stdio.h>
 #include "podst.h"
 #include "struktury.h"
