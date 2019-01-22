@@ -20,7 +20,7 @@ int main()
     glowy ->nazwaPliku = NULL;
     printf("WITAJ W BAZIE UCZELNI!\n");
     rysujPrzerwe();
-    char wybor;
+    char wybor = 1;
     while ( wybor != 'e' )
     {
         wyswietlMenu();
