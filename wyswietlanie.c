@@ -4,7 +4,7 @@ void wyswietlListeStudentow( Glowy* glowy )
 {
     glowy ->student = posortujWedlugNazwiska( glowy ->student );
     Osoba* x;
-    char wybor;
+    char wybor = 1;
     while ( wybor != 'e' )
     {
         wyczyscEkran();
@@ -62,7 +62,7 @@ void wyswietlListePracownikow( Glowy* glowy )
 {
     glowy ->pracownik = posortujWedlugNazwiska( glowy ->pracownik );
     Osoba* x;
-    char wybor;
+    char wybor = 1;
     while ( wybor != 'e' )
     {
         wyczyscEkran();
@@ -115,7 +115,7 @@ void wyswietlListePracownikow( Glowy* glowy )
 void wyswietlListePrzedmiotow( Glowy* glowy )
 {
     Przedmiot* x;
-    char wybor;
+    char wybor = 1;
     while ( wybor != 'e' )
     {
         glowy ->przedmiot = posortujWedlugNazwy( glowy ->przedmiot );
@@ -162,7 +162,7 @@ void wyswietlListePrzedmiotow( Glowy* glowy )
 
 void wypisStudent( Osoba* student, Glowy* glowy )
 {
-    char wybor;
+    char wybor = 1;
     while ( wybor != 'e' && wybor != 'U' )
     {
         wyczyscEkran();
@@ -213,7 +213,7 @@ void wyswietlListeStudentowZapisanychNaPrzedmiot( Przedmiot* przedmiot, OsobaPrz
 
 void wypisPrzedmiot( Przedmiot* przedmiot, Glowy* glowy )
 {
-    char wybor;
+    char wybor = 1;
     while ( wybor != 'e' && wybor != 'U' )
     {
         printf("NAZWA PRZEDMIOTU: %s\n", przedmiot ->nazwa );
@@ -269,7 +269,7 @@ void wypisPrzedmiot( Przedmiot* przedmiot, Glowy* glowy )
 
 void wypisPracownik( Glowy* glowy, Osoba* pracownik )
 {
-    char wybor;
+    char wybor = 1;
     while ( wybor != 'e' && wybor != 'U' )
     {
         printf( "IMIE:          %s\n", pracownik ->imie );
