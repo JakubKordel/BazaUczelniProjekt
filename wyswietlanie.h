@@ -19,6 +19,7 @@ void wypisPrzedmiot( Przedmiot* przedmiot, Glowy* glowy );
 void wypisPracownik( Glowy* glowy, Osoba* pracownik );
 void menuWczytywania ( Glowy* glowy );
 void menuZapisywania( Glowy* glowy );
+void menuUsuwania ( Glowy* glowy );
 
 
 

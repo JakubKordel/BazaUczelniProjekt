@@ -40,8 +40,11 @@ int main()
         case 'W':
             menuWczytywania( glowy );
             break;
-         case 'Z':
+        case 'Z':
             menuZapisywania( glowy );
+            break;
+        case 'U':
+            menuUsuwania( glowy );
             break;
         case 'e':
             break;
@@ -64,6 +67,7 @@ int main()
         }
         wyczyscEkran();
     }
+    zapiszBaze( glowy, "zapasowy.ucb");
     zwolnijOsoba( glowy ->student );
     zwolnijOsoba( glowy ->pracownik );
     zwolnijPrzedmiot( glowy ->przedmiot );

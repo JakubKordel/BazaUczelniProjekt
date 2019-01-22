@@ -41,9 +41,11 @@ void wyswietlListeStudentow( Glowy* glowy )
             break;
         case 'D':
             glowy ->student = wczytajOsobe( glowy ->student );
+            zapiszBaze( glowy, "zapasowy.ucb");
             break;
         case 'U':
             wczytajUsuwanaOsobe( glowy, 1 );
+            zapiszBaze( glowy, "zapasowy.ucb");
             break;
         case 'W':
             wczytajOsobeDoWypisania( glowy, 1 );
@@ -89,9 +91,11 @@ void wyswietlListePracownikow( Glowy* glowy )
         {
         case 'D':
             glowy ->pracownik = wczytajOsobe( glowy ->pracownik );
+            zapiszBaze( glowy, "zapasowy.ucb");
             break;
         case 'U':
             wczytajUsuwanaOsobe( glowy, 2 );
+            zapiszBaze( glowy, "zapasowy.ucb");
             break;
         case 'N':
             glowy ->pracownik = posortujWedlugNazwiska( glowy ->pracownik );
@@ -142,9 +146,11 @@ void wyswietlListePrzedmiotow( Glowy* glowy )
         {
         case 'D':
             glowy ->przedmiot = wczytajPrzedmiot( glowy ->przedmiot );
+            zapiszBaze( glowy, "zapasowy.ucb");
             break;
         case 'U':
             wczytajUsuwanyPrzedmiot( glowy );
+            zapiszBaze( glowy, "zapasowy.ucb");
             break;
         case 'W':
             wczytajPrzedmiotDoWypisania( glowy );
@@ -187,9 +193,11 @@ void wypisStudent( Osoba* student, Glowy* glowy )
         {
         case 'P':
             podepnijOsobeNaPrzedmiot( glowy, student, NULL, 1 );
+            zapiszBaze( glowy, "zapasowy.ucb");
             break;
         case 'U':
             usuwanieStudenta( glowy, student );
+            zapiszBaze( glowy, "zapasowy.ucb");
             break;
         case 'e':
             break;
@@ -243,18 +251,23 @@ void wypisPrzedmiot( Przedmiot* przedmiot, Glowy* glowy )
         {
         case 'P':
             podepnijOsobeNaPrzedmiot( glowy, NULL, przedmiot, 1 );
+            zapiszBaze( glowy, "zapasowy.ucb");
             break;
         case 'U':
             usuwaniePrzedmiotu( glowy, przedmiot );
+            zapiszBaze( glowy, "zapasowy.ucb");
             break;
         case 'D':
             podepnijOsobeNaPrzedmiot( glowy, NULL, przedmiot, 2 );
+            zapiszBaze( glowy, "zapasowy.ucb");
             break;
         case 'u':
             usunZprzedmiotuStudenta( glowy, przedmiot );
+            zapiszBaze( glowy, "zapasowy.ucb");
             break;
         case 'r':
             usunZprzedmiotuProwadzacego( glowy, przedmiot );
+            zapiszBaze( glowy, "zapasowy.ucb");
             break;
         case 'e':
             break;
@@ -295,9 +308,11 @@ void wypisPracownik( Glowy* glowy, Osoba* pracownik )
         {
         case 'D':
             podepnijOsobeNaPrzedmiot( glowy, pracownik, NULL, 2 );
+            zapiszBaze( glowy, "zapasowy.ucb");
             break;
         case 'U':
             usuwaniePracownika( glowy, pracownik );
+            zapiszBaze( glowy, "zapasowy.ucb");
             break;
         case 'e':
             break;
@@ -384,6 +399,9 @@ void menuZapisywania( Glowy* glowy )
         pliki = pliki ->nast;
     }
     printf( "\nPodaj nazwe zapisu(bez rozszerzenia), mozesz wybrac jeden z powyzszych lub nowy:\n\n" );
+    printf( "\nUWAGA: zapis w pliku zapasowy.ucb nie ma sensu bo jest on stale\n" );
+    printf( "zastepowany przez aktualne dane w programie,\n" );
+    printf( "zapis danych w tym pliku grozi utrata danych\n\n" );
     scanf( "%s", nazwa );
     wyczyscBuf();
     if ( strlen( nazwa ) < MAX - 5 )
@@ -392,4 +410,50 @@ void menuZapisywania( Glowy* glowy )
         zapiszBaze( glowy, nazwa );
     }
 }
+
+void menuUsuwania ( Glowy* glowy )
+{
+    wyczyscEkran();
+    printf( "Pliki z bazami:\n");
+    zwolnijNazwaPliku( glowy ->nazwaPliku );
+    glowy ->nazwaPliku = NULL;
+    wczytajNazwyPlikow( glowy );
+    glowy ->nazwaPliku = posortujWedlugCzasu( glowy ->nazwaPliku );
+    NazwaPliku* pliki = glowy ->nazwaPliku;
+    int numer;
+    int i = 1;
+    time_t czasZapisu;
+    while ( pliki )
+    {
+        printf( "%d. %s\t", i, pliki ->nazwa );
+        if ( pliki ->czas != 0 )
+        {
+            czasZapisu = ( time_t )pliki ->czas;
+            printf( ctime( &czasZapisu ) );
+        }
+        else
+            printf( "\n");
+        pliki = pliki ->nast;
+        ++i;
+    }
+    printf( "\nPodaj numer pliku z baza, ktora chcesz usunac\n" );
+    printf( "Inny klawisz aby wrocic\n" );
+    if ( scanf( "%d", &numer ) )
+    {
+        wyczyscBuf();
+        i = 1;
+        pliki = glowy ->nazwaPliku;
+        while ( pliki && i < numer+1 )
+        {
+            if ( numer == i )
+            {
+                remove( pliki ->nazwa );
+            }
+            pliki = pliki ->nast;
+            ++i;
+        }
+    }
+    wyczyscBuf();
+}
+
 
