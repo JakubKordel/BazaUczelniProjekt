@@ -127,3 +127,14 @@ NazwaPliku* wyszukajNazwePliku( NazwaPliku* glowa, char nazw[ MAX ] )
     }
     return glowa;
 }
+
+unsigned int policzNazwy ( NazwaPliku* glowa )
+{
+    unsigned int licznik = 0;
+    while ( glowa )
+    {
+        ++licznik;
+        glowa = glowa ->nast;
+    }
+    return licznik;
+}

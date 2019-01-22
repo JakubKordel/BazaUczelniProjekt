@@ -8,6 +8,7 @@
 #include "string.h"
 #include "dirent.h"
 #include "podst.h"
+#include <time.h>
 
 void zapiszBaze( Glowy* glowy, char* nazwaPliku );
 void wczytajBaze( Glowy* glowy, char* nazwaPliku );

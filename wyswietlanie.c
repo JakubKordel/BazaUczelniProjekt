@@ -313,16 +313,25 @@ void wypisPracownik( Glowy* glowy, Osoba* pracownik )
 void menuWczytywania ( Glowy* glowy )
 {
     wyczyscEkran();
-    printf( "Pliki z bazami:\n ");
+    printf( "Pliki z bazami:\n");
     zwolnijNazwaPliku( glowy ->nazwaPliku );
     glowy ->nazwaPliku = NULL;
     wczytajNazwyPlikow( glowy );
+    glowy ->nazwaPliku = posortujWedlugCzasu( glowy ->nazwaPliku );
     NazwaPliku* pliki = glowy ->nazwaPliku;
     int numer;
     int i = 1;
+    time_t czasZapisu;
     while ( pliki )
     {
-        printf( "%d. %s\n", i, pliki ->nazwa );
+        printf( "%d. %s\t", i, pliki ->nazwa );
+        if ( pliki ->czas != 0 )
+        {
+            czasZapisu = ( time_t )pliki ->czas;
+            printf( ctime( &czasZapisu ) );
+        }
+        else
+            printf( "\n");
         pliki = pliki ->nast;
         ++i;
     }
@@ -349,6 +358,7 @@ void menuWczytywania ( Glowy* glowy )
             ++i;
         }
     }
+    wyczyscBuf();
 }
 
 void menuZapisywania( Glowy* glowy )
@@ -357,14 +367,23 @@ void menuZapisywania( Glowy* glowy )
     zwolnijNazwaPliku( glowy ->nazwaPliku );
     glowy ->nazwaPliku = NULL;
     wczytajNazwyPlikow( glowy );
+    glowy ->nazwaPliku = posortujWedlugCzasu( glowy ->nazwaPliku );
     NazwaPliku* pliki = glowy ->nazwaPliku;
     char nazwa[ MAX ];
+    time_t czasZapisu;
     while ( pliki )
     {
-        printf( "%s\n", pliki ->nazwa );
+        printf( "%s\t", pliki ->nazwa );
+        if ( pliki ->czas != 0 )
+        {
+            czasZapisu = ( time_t )pliki ->czas;
+            printf( ctime( &czasZapisu ) );
+        }
+        else
+            printf( "\n");
         pliki = pliki ->nast;
     }
-    printf( "\nPodaj nazwe zapisu (bez rozszerzenia), mozesz wybrac jeden z powyzszych lub nowy:\n\n" );
+    printf( "\nPodaj nazwe zapisu(bez rozszerzenia), mozesz wybrac jeden z powyzszych lub nowy:\n\n" );
     scanf( "%s", nazwa );
     wyczyscBuf();
     if ( strlen( nazwa ) < MAX - 5 )

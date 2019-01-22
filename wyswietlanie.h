@@ -8,6 +8,7 @@
 #include "uzytkownik.h"
 #include "zapis.h"
 #include "poprawnosc.h"
+#include <time.h>
 
 void wyswietlListeStudentow( Glowy* glowy );
 void wyswietlListePracownikow( Glowy* glowy );

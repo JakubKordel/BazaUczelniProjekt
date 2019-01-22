@@ -24,8 +24,10 @@ char* wczytajNapis( char napis[ MAX ] )
     {
         scanf( "%s", napis );
     }
-    while ( strlen ( napis ) > MAX - 2 );
+    while ( strlen ( napis ) > MAX - 3 );
     wyczyscBuf();
+    if ( porownajNapisy( napis, "." ) )
+        strcat( napis, ".");
     return napis;
 }
 

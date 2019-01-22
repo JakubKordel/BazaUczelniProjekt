@@ -28,6 +28,7 @@ typedef struct OsobaPrzedmiot
 typedef struct NazwaPliku
 {
     char nazwa[ MAX ];
+    long long int czas;
     struct NazwaPliku* nast;
 } NazwaPliku;
 
@@ -45,5 +46,5 @@ typedef struct Glowy
 Osoba* dodajOsobe( Osoba* glowa, char imie[ MAX ], char nazwisko[ MAX ], int id );
 Przedmiot* dodajPrzedmiot( Przedmiot* glowaPrzedmiot, char nazwa[ MAX ] );
 OsobaPrzedmiot* dodajOsobaPrzedmiot( OsobaPrzedmiot* glowaOsobaPrzedmiot, Osoba* osoba, Przedmiot* przedmiot );
-NazwaPliku* dodajNazwaPliku( NazwaPliku* glowaNazwaPliku, char nazw[ MAX ] );
+NazwaPliku* dodajNazwaPliku( NazwaPliku* glowaNazwaPliku, char nazw[ MAX ], long long int czasLiczba );
 

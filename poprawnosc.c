@@ -3,55 +3,25 @@
 int czyPlikPoprawny ( char nazwaPliku[ MAX ] )
 {
     FILE *fp = NULL;
-    fp = fopen( nazwaPliku, "r");
     char linia[MAX];
     int numer;
-    while ( fscanf( fp, "%s", linia ) != 0 && feof( fp ) == 0 )
-    {
-        if ( strlen( linia ) > MAX - 4 )
-        {
-            fclose( fp );
-            return 0;
-        }
-    }
-    fclose( fp );
     fp = fopen( nazwaPliku, "r");
-    if ( !fscanf( fp, "%s", linia ) || !porownajNapisy( linia, "*STUDENCI*")  )
+    if ( !fscanf( fp, "%124s", linia ) || !porownajNapisy( linia, "*STUDENCI*")  )
     {
-        fclose( fp );
-        return 0;
-    }
-    while ( fscanf( fp, "%s", linia ) && !porownajNapisy( linia, "." ) && feof( fp ) == 0 )
-    {
-        if ( !fscanf( fp, "%s", linia ) )
-        {
-            fclose( fp );
-            return 0;
-        }
-        if ( !fscanf( fp, "%d", &numer ) )
+        if ( !fscanf( fp, "%124s", linia ) || !porownajNapisy( linia, "*STUDENCI*")  )
         {
             fclose( fp );
             return 0;
         }
     }
-    if ( !porownajNapisy( linia, "." ) )
+    while ( fscanf( fp, "%124s", linia ) && !porownajNapisy( linia, "." ) && feof( fp ) == 0 )
     {
-        fclose( fp );
-        return 0;
-    }
-    if ( !fscanf( fp, "%s", linia ) || !porownajNapisy( linia, "*PRACOWNICY*") )
-    {
-        fclose( fp );
-        return 0;
-    }
-    while ( fscanf( fp, "%s", linia ) && !porownajNapisy( linia, "." ) && feof( fp ) == 0 )
-    {
-        if ( !fscanf( fp, "%s", linia ) )
+        if ( !fscanf( fp, "%124s", linia ) )
         {
             fclose( fp );
             return 0;
         }
-        if ( !fscanf( fp, "%d", &numer ) )
+        if ( !fscanf( fp, "%d", &numer ) && numer < 0 )
         {
             fclose( fp );
             return 0;
@@ -62,46 +32,69 @@ int czyPlikPoprawny ( char nazwaPliku[ MAX ] )
         fclose( fp );
         return 0;
     }
-    if ( !fscanf( fp, "%s", linia ) || !porownajNapisy( linia, "*PRZEDMIOTY*") )
+    if ( !fscanf( fp, "%124s", linia ) || !porownajNapisy( linia, "*PRACOWNICY*") )
     {
         fclose( fp );
         return 0;
     }
-    while ( fscanf( fp, "%s", linia ) && !porownajNapisy( linia, "." ) && feof( fp ) == 0 )
+    while ( fscanf( fp, "%124s", linia ) && !porownajNapisy( linia, "." ) && feof( fp ) == 0 )
     {
-    }
-    if ( !fscanf( fp, "%s ", linia ) || !porownajNapisy( linia, "*STUDENT-PRZEDMIOT*") )
-    {
-        fclose( fp );
-        return 0;
-    }
-    while ( fscanf( fp, "%d", &numer ) && feof( fp ) == 0 )
-    {
-        if ( !fscanf( fp, "%s", linia ) )
+        if ( !fscanf( fp, "%124s", linia ) )
+        {
+            fclose( fp );
+            return 0;
+        }
+        if ( !fscanf( fp, "%d", &numer ) && numer < 0 )
         {
             fclose( fp );
             return 0;
         }
     }
-    if ( fscanf( fp, "%s", linia ) && !porownajNapisy( linia, ".") )
+    if ( !porownajNapisy( linia, "." ) )
     {
         fclose( fp );
         return 0;
     }
-    if ( !fscanf( fp, "%s", linia ) || !porownajNapisy( linia, "*PRACOWNIK-PRZEDMIOT*") )
+    if ( !fscanf( fp, "%124s", linia ) || !porownajNapisy( linia, "*PRZEDMIOTY*") )
     {
         fclose( fp );
         return 0;
     }
-    while ( fscanf( fp, "%d", &numer ) && feof( fp ) == 0 )
+    while ( fscanf( fp, "%124s", linia ) && !porownajNapisy( linia, "." ) && feof( fp ) == 0 )
     {
-        if ( !fscanf( fp, "%s", linia ) )
+    }
+    if ( !fscanf( fp, "%124s ", linia ) || !porownajNapisy( linia, "*STUDENT-PRZEDMIOT*") )
+    {
+        fclose( fp );
+        return 0;
+    }
+    while ( fscanf( fp, "%d", &numer ) && feof( fp ) == 0 && numer < 0 )
+    {
+        if ( !fscanf( fp, "%124s", linia ) )
         {
             fclose( fp );
             return 0;
         }
     }
-    if ( fscanf( fp, "%s", linia ) && !porownajNapisy( linia, "." ) )
+    if ( fscanf( fp, "%124s", linia ) && !porownajNapisy( linia, ".") )
+    {
+        fclose( fp );
+        return 0;
+    }
+    if ( !fscanf( fp, "%124s", linia ) || !porownajNapisy( linia, "*PRACOWNIK-PRZEDMIOT*") )
+    {
+        fclose( fp );
+        return 0;
+    }
+    while ( fscanf( fp, "%d", &numer ) && feof( fp ) == 0 && numer < 0)
+    {
+        if ( !fscanf( fp, "%124s", linia ) )
+        {
+            fclose( fp );
+            return 0;
+        }
+    }
+    if ( fscanf( fp, "%124s", linia ) && !porownajNapisy( linia, "." ) )
     {
         fclose( fp );
         return 0;

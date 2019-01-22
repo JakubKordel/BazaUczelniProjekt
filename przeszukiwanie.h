@@ -13,5 +13,6 @@ unsigned int policzPrzedmioty ( Przedmiot* glowa );
 OsobaPrzedmiot* wyszukajOsobaPrzedmiot( OsobaPrzedmiot* glowa, Osoba* os, Przedmiot* przedm );
 OsobaPrzedmiot* poprzednikOsobaPrzedmiot( OsobaPrzedmiot* glowa, OsobaPrzedmiot* osobaPrzedmiot );
 int znajdzMaxId( Osoba* glowa );
+unsigned int policzNazwy ( NazwaPliku* glowa );
 
 

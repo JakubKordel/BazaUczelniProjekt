@@ -167,3 +167,44 @@ Osoba* posortujWedlugIndeksu( Osoba* glowa )
     return glowa;
 }
 
+NazwaPliku* posortujWedlugCzasu( NazwaPliku* glowa )
+{
+    unsigned int n, flaga;
+    NazwaPliku* poprzedni = NULL;
+    NazwaPliku* pierwszy = NULL;
+    NazwaPliku* drugi = NULL;
+    n = policzNazwy( glowa );
+    if ( n < 2 )
+        return glowa;
+    do
+    {
+        flaga = 0;
+        pierwszy = glowa;
+        drugi = glowa ->nast;
+        for ( int i = 0 ; i < n - 1 ; ++i )
+        {
+            if ( pierwszy ->czas < drugi ->czas )
+            {
+                pierwszy ->nast = drugi ->nast;
+                drugi ->nast = pierwszy;
+                if ( i == 0)
+                    glowa = drugi;
+                else
+                    poprzedni ->nast = drugi;
+                poprzedni = drugi;
+                drugi = pierwszy ->nast;
+                flaga = 1;
+            }
+            else
+            {
+                poprzedni = pierwszy;
+                pierwszy = drugi;
+                drugi = drugi ->nast;
+            }
+        }
+        --n;
+    }
+    while ( flaga );
+    return glowa;
+}
+

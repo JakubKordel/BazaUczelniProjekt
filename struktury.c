@@ -31,10 +31,11 @@ OsobaPrzedmiot* dodajOsobaPrzedmiot( OsobaPrzedmiot* glowaOsobaPrzedmiot, Osoba*
     return nowyOsobaPrzedmiot;
 }
 
-NazwaPliku* dodajNazwaPliku( NazwaPliku* glowa, char nazw[ MAX ] )
+NazwaPliku* dodajNazwaPliku( NazwaPliku* glowa, char nazw[ MAX ], long long int czasLiczba )
 {
     NazwaPliku* nowaNazwa = malloc( sizeof( NazwaPliku ) );
     strcpy ( nowaNazwa ->nazwa, nazw );
+    nowaNazwa ->czas = czasLiczba;
     nowaNazwa ->nast = glowa;
     return nowaNazwa;
 }

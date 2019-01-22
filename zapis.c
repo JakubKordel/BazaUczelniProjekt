@@ -6,6 +6,9 @@ void zapiszBaze( Glowy* glowy, char* nazwaPliku )
     fp = fopen( nazwaPliku, "w");
     Osoba* osoba;
     Przedmiot* przedmiot = glowy ->przedmiot;
+    time_t czas;
+    czas = time(0);
+    fprintf( fp, "%lld\n", ( long long int )czas);
     for ( int i = 0; i < 2; ++i )
     {
         if  ( i == 0 )
@@ -74,6 +77,8 @@ void wczytajBaze( Glowy* glowy, char* nazwaPliku )
     char nazwisko[ MAX ];
     char nazwa[ MAX ];
     int id;
+    Osoba* osoba = NULL;
+    Przedmiot* przedmiot = NULL;
     FILE *fp = NULL;
     fp = fopen( nazwaPliku, "r");
     char linia[MAX];
@@ -92,9 +97,15 @@ void wczytajBaze( Glowy* glowy, char* nazwaPliku )
             fscanf( fp, "%s ", nazwisko );
             fscanf( fp, "%d ", &id );
             if  ( i == 0 )
-                glowy ->student = dodajOsobe( glowy ->student, imie, nazwisko, id );
+            {
+                if ( wyszukajOsobe( glowy ->student, imie, nazwisko ) == NULL && wyszukajOsobeWedlugId( glowy ->student, id ) == NULL )
+                    glowy ->student = dodajOsobe( glowy ->student, imie, nazwisko, id );
+            }
             if ( i == 1 )
-                glowy ->pracownik = dodajOsobe( glowy ->pracownik, imie, nazwisko, id );
+            {
+                if ( wyszukajOsobe( glowy ->pracownik, imie, nazwisko ) == NULL && wyszukajOsobeWedlugId( glowy ->pracownik, id ) == NULL )
+                    glowy ->pracownik = dodajOsobe( glowy ->pracownik, imie, nazwisko, id );
+            }
         }
     }
     strcpy( znacznik, "*PRZEDMIOTY*" );
@@ -103,7 +114,8 @@ void wczytajBaze( Glowy* glowy, char* nazwaPliku )
     }
     while ( fscanf( fp, "%s ", nazwa ) && porownajNapisy( nazwa, "." ) == 0)
     {
-        glowy ->przedmiot = dodajPrzedmiot( glowy ->przedmiot, nazwa );
+        if ( wyszukajPrzedmiot( glowy ->przedmiot, nazwa ) == NULL )
+            glowy ->przedmiot = dodajPrzedmiot( glowy ->przedmiot, nazwa );
     }
     for ( int i = 0; i < 2; ++i )
     {
@@ -119,13 +131,17 @@ void wczytajBaze( Glowy* glowy, char* nazwaPliku )
             fscanf( fp, "%s ", nazwa );
             if  ( i == 0 )
             {
-                glowy ->studentPrzedmiot = dodajOsobaPrzedmiot(
-                                               glowy ->studentPrzedmiot, wyszukajOsobeWedlugId( glowy ->student, id ), wyszukajPrzedmiot( glowy->przedmiot, nazwa ) );
+                osoba = wyszukajOsobeWedlugId( glowy ->student, id );
+                przedmiot = wyszukajPrzedmiot( glowy->przedmiot, nazwa );
+                if ( osoba && przedmiot )
+                    glowy ->studentPrzedmiot = dodajOsobaPrzedmiot( glowy ->studentPrzedmiot, osoba, przedmiot );
             }
             if ( i == 1 )
             {
-                glowy ->pracownikPrzedmiot = dodajOsobaPrzedmiot(
-                                                 glowy ->pracownikPrzedmiot, wyszukajOsobeWedlugId( glowy ->pracownik, id ), wyszukajPrzedmiot( glowy->przedmiot, nazwa ) );
+                osoba = wyszukajOsobeWedlugId( glowy ->pracownik, id );
+                przedmiot = wyszukajPrzedmiot( glowy->przedmiot, nazwa );
+                if ( osoba && przedmiot )
+                    glowy ->pracownikPrzedmiot = dodajOsobaPrzedmiot( glowy ->pracownikPrzedmiot, osoba, przedmiot );
             }
         }
     }
@@ -137,11 +153,17 @@ void wczytajNazwyPlikow( Glowy* glowy )
     zwolnijNazwaPliku( glowy ->nazwaPliku );
     DIR* strumien = opendir( "." );
     struct dirent* nazwy = readdir( strumien );
+    long long int czas = 0;
     while ( nazwy != NULL )
     {
         if ( czyPrawidloweRozszerzenie( nazwy ->d_name ) )
         {
-            glowy ->nazwaPliku = dodajNazwaPliku( glowy ->nazwaPliku, nazwy ->d_name );
+            FILE *fp = NULL;
+            fp = fopen( nazwy ->d_name, "r");
+            if ( !fscanf( fp, "%llu", &czas ) )
+                czas = 0;
+            glowy ->nazwaPliku = dodajNazwaPliku( glowy ->nazwaPliku, nazwy ->d_name, czas );
+            fclose( fp );
         }
         nazwy = readdir( strumien );
     }
