@@ -89,9 +89,7 @@ void wczytajBaze( Glowy* glowy, char* nazwaPliku )
             strcpy(znacznik, "*STUDENCI*");
         if ( i == 1 )
             strcpy(znacznik, "*PRACOWNICY*");
-        while ( fscanf( fp, "%s ", linia ) && porownajNapisy( linia, znacznik ) == 0 )
-        {
-        }
+        while ( fscanf( fp, "%s ", linia ) && porownajNapisy( linia, znacznik ) == 0 );
         while ( fscanf( fp, "%s ", imie ) && porownajNapisy( imie, "." ) != 1)
         {
             fscanf( fp, "%s ", nazwisko );
@@ -109,9 +107,7 @@ void wczytajBaze( Glowy* glowy, char* nazwaPliku )
         }
     }
     strcpy( znacznik, "*PRZEDMIOTY*" );
-    while ( fscanf( fp, "%s ", linia ) && porownajNapisy( linia, znacznik ) == 0 )
-    {
-    }
+    while ( fscanf( fp, "%s ", linia ) && porownajNapisy( linia, znacznik ) == 0 );
     while ( fscanf( fp, "%s ", nazwa ) && porownajNapisy( nazwa, "." ) == 0)
     {
         if ( wyszukajPrzedmiot( glowy ->przedmiot, nazwa ) == NULL )
@@ -120,12 +116,10 @@ void wczytajBaze( Glowy* glowy, char* nazwaPliku )
     for ( int i = 0; i < 2; ++i )
     {
         if  ( i == 0 )
-            strcpy(znacznik, "*STUDENT-PRZEDMIOT*");
+            strcpy( znacznik, "*STUDENT-PRZEDMIOT*" );
         if ( i == 1 )
-            strcpy(znacznik, "*PRACOWNIK-PRZEDMIOT*");
-        while ( fscanf( fp, "%s ", linia ) && porownajNapisy( linia, znacznik ) == 0 )
-        {
-        }
+            strcpy( znacznik, "*PRACOWNIK-PRZEDMIOT*" );
+        while ( fscanf( fp, "%s ", linia ) && porownajNapisy( linia, znacznik ) == 0 );
         while ( fscanf( fp, "%d ", &id ) )
         {
             fscanf( fp, "%s ", nazwa );
@@ -151,6 +145,7 @@ void wczytajBaze( Glowy* glowy, char* nazwaPliku )
 void wczytajNazwyPlikow( Glowy* glowy )
 {
     zwolnijNazwaPliku( glowy ->nazwaPliku );
+    glowy ->nazwaPliku = NULL;
     DIR* strumien = opendir( "." );
     struct dirent* nazwy = readdir( strumien );
     long long int czas = 0;
