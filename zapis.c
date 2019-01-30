@@ -162,5 +162,6 @@ void wczytajNazwyPlikow( Glowy* glowy )
         }
         nazwy = readdir( strumien );
     }
+    closedir( strumien );
 }
 
